@@ -1,0 +1,673 @@
+openapi: 3.0.3
+info:
+  title: MAD Investimentos API
+  version: 0.1.0
+  description: API REST para gestao de carteiras de acoes e FIIs.
+servers:
+  - url: http://localhost:8080
+security:
+  - bearerAuth: []
+paths:
+  /auth/register:
+    post:
+      security: []
+      tags: [Auth]
+      summary: Registrar usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Usuario registrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '409':
+          $ref: '#/components/responses/Error'
+  /auth/login:
+    post:
+      security: []
+      tags: [Auth]
+      summary: Autenticar usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login realizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          $ref: '#/components/responses/Error'
+  /auth/refresh:
+    post:
+      security: []
+      tags: [Auth]
+      summary: Renovar access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        '200':
+          description: Token renovado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+  /carteiras:
+    get:
+      tags: [Carteiras]
+      summary: Listar carteiras
+      responses:
+        '200':
+          description: Lista de carteiras
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Carteira'
+    post:
+      tags: [Carteiras]
+      summary: Criar carteira
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarteiraRequest'
+      responses:
+        '201':
+          description: Carteira criada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carteira'
+  /carteiras/{id}:
+    get:
+      tags: [Carteiras]
+      summary: Obter carteira
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Carteira
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carteira'
+    put:
+      tags: [Carteiras]
+      summary: Atualizar carteira
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarteiraRequest'
+      responses:
+        '200':
+          description: Carteira atualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carteira'
+    delete:
+      tags: [Carteiras]
+      summary: Excluir carteira
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Excluida
+        '409':
+          $ref: '#/components/responses/Error'
+        '422':
+          $ref: '#/components/responses/Error'
+  /ativos:
+    get:
+      tags: [Ativos]
+      summary: Listar ativos
+      responses:
+        '200':
+          description: Lista de ativos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ativo'
+    post:
+      tags: [Ativos]
+      summary: Cadastrar ativo validado pela Brapi
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AtivoRequest'
+      responses:
+        '201':
+          description: Ativo criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ativo'
+        '422':
+          $ref: '#/components/responses/Error'
+  /ativos/validar:
+    get:
+      tags: [Ativos]
+      summary: Validar ticker na Brapi
+      parameters:
+        - name: ticker
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Resultado da validacao
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtivoValidacao'
+        '422':
+          $ref: '#/components/responses/Error'
+  /ativos/{id}:
+    get:
+      tags: [Ativos]
+      summary: Obter ativo
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Ativo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ativo'
+    put:
+      tags: [Ativos]
+      summary: Atualizar ativo
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AtivoRequest'
+      responses:
+        '200':
+          description: Ativo atualizado
+    delete:
+      tags: [Ativos]
+      summary: Desativar ativo
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Desativado
+  /carteiras/{cid}/operacoes:
+    get:
+      tags: [Operacoes]
+      summary: Listar operacoes da carteira
+      parameters:
+        - $ref: '#/components/parameters/Cid'
+      responses:
+        '200':
+          description: Lista
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Operacao'
+    post:
+      tags: [Operacoes]
+      summary: Registrar operacao
+      parameters:
+        - $ref: '#/components/parameters/Cid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperacaoRequest'
+      responses:
+        '201':
+          description: Operacao criada
+        '422':
+          $ref: '#/components/responses/Error'
+  /carteiras/{cid}/eventos:
+    get:
+      tags: [Eventos]
+      summary: Listar eventos corporativos
+      parameters:
+        - $ref: '#/components/parameters/Cid'
+      responses:
+        '200':
+          description: Lista
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventoCorporativo'
+    post:
+      tags: [Eventos]
+      summary: Registrar evento corporativo
+      parameters:
+        - $ref: '#/components/parameters/Cid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventoRequest'
+      responses:
+        '201':
+          description: Evento criado
+  /carteiras/{cid}/posicoes:
+    get:
+      tags: [Posicoes]
+      summary: Listar posicoes calculadas sob demanda
+      description: Por padrao, posicoes com quantidade atual zero nao sao retornadas.
+      parameters:
+        - $ref: '#/components/parameters/Cid'
+        - name: incluirZeradas
+          in: query
+          required: false
+          description: Quando true, inclui ativos com quantidade atual zero no resultado.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Posicoes
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              description: max-age=60
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posicao'
+  /carteiras/{cid}/posicoes/{ativoId}:
+    get:
+      tags: [Posicoes]
+      summary: Obter posicao calculada de um ativo
+      parameters:
+        - $ref: '#/components/parameters/Cid'
+        - name: ativoId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Posicao
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posicao'
+  /posicoes/consolidado:
+    get:
+      tags: [Posicoes]
+      summary: Posicoes consolidadas de todas as carteiras
+      description: Por padrao, posicoes consolidadas com quantidade atual zero nao sao retornadas.
+      parameters:
+        - name: incluirZeradas
+          in: query
+          required: false
+          description: Quando true, inclui ativos com quantidade atual zero no resultado consolidado.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Consolidado
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posicao'
+  /carteiras/{cid}/proventos:
+    get:
+      tags: [Proventos]
+      summary: Listar proventos
+      parameters:
+        - $ref: '#/components/parameters/Cid'
+      responses:
+        '200':
+          description: Lista
+    post:
+      tags: [Proventos]
+      summary: Registrar provento manual
+      parameters:
+        - $ref: '#/components/parameters/Cid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProventoRequest'
+      responses:
+        '201':
+          description: Provento criado
+  /carteiras/{cid}/proventos/resumo:
+    get:
+      tags: [Proventos]
+      summary: Resumo de proventos por periodo
+      parameters:
+        - $ref: '#/components/parameters/Cid'
+        - name: agrupamento
+          in: query
+          schema:
+            type: string
+            enum: [MES, TRIMESTRE, ANO]
+      responses:
+        '200':
+          description: Resumo
+  /cotacoes/atualizar:
+    post:
+      tags: [Cotacoes]
+      summary: Atualizar cotacoes sob demanda
+      responses:
+        '202':
+          description: Atualizacao solicitada
+  /cotacoes/{ativoId}:
+    get:
+      tags: [Cotacoes]
+      summary: Obter cotacao atual
+      parameters:
+        - name: ativoId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Cotacao
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CotacaoAtual'
+  /dashboard:
+    get:
+      tags: [Dashboard]
+      summary: Resumo do dashboard
+      parameters:
+        - name: carteiraId
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Dashboard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+  /dashboard/evolucao:
+    get:
+      tags: [Dashboard]
+      summary: Evolucao mensal do patrimonio
+      responses:
+        '200':
+          description: Serie mensal
+  /dashboard/proventos-mensais:
+    get:
+      tags: [Dashboard]
+      summary: Proventos por mes
+      responses:
+        '200':
+          description: Serie mensal
+  /carteiras/{cid}/ativos/{aid}/comentarios:
+    get:
+      tags: [Comentarios]
+      summary: Listar comentarios do ativo
+      parameters:
+        - $ref: '#/components/parameters/Cid'
+        - $ref: '#/components/parameters/Aid'
+      responses:
+        '200':
+          description: Lista
+    post:
+      tags: [Comentarios]
+      summary: Criar comentario
+      parameters:
+        - $ref: '#/components/parameters/Cid'
+        - $ref: '#/components/parameters/Aid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [texto]
+              properties:
+                texto:
+                  type: string
+      responses:
+        '201':
+          description: Comentario criado
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+    Cid:
+      name: cid
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+    Aid:
+      name: aid
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+  responses:
+    Error:
+      description: Erro padronizado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          example: ERR-003
+        message:
+          type: string
+          example: Ticker invalido ou nao encontrado.
+        details:
+          type: object
+          additionalProperties: true
+    RegisterRequest:
+      type: object
+      required: [email, senha, nome]
+      properties:
+        email: { type: string, format: email }
+        senha: { type: string, minLength: 8 }
+        nome: { type: string }
+    LoginRequest:
+      type: object
+      required: [email, senha]
+      properties:
+        email: { type: string, format: email }
+        senha: { type: string }
+    AuthResponse:
+      type: object
+      required: [accessToken, refreshToken, tokenType]
+      properties:
+        accessToken: { type: string }
+        refreshToken: { type: string }
+        tokenType: { type: string, example: Bearer }
+    CarteiraRequest:
+      type: object
+      required: [nome]
+      properties:
+        nome: { type: string, maxLength: 120 }
+        descricao: { type: string, nullable: true }
+    Carteira:
+      allOf:
+        - $ref: '#/components/schemas/CarteiraRequest'
+        - type: object
+          properties:
+            id: { type: integer, format: int64 }
+            dataCriacao: { type: string, format: date-time }
+    AtivoRequest:
+      type: object
+      required: [ticker, nome, tipo]
+      properties:
+        ticker: { type: string, example: PETR4 }
+        nome: { type: string }
+        tipo: { type: string, enum: [ACAO, FII] }
+        setor: { type: string, nullable: true }
+        segmento: { type: string, nullable: true }
+    Ativo:
+      allOf:
+        - $ref: '#/components/schemas/AtivoRequest'
+        - type: object
+          properties:
+            id: { type: integer, format: int64 }
+            ativo: { type: boolean }
+    AtivoValidacao:
+      type: object
+      required: [ticker, valido]
+      properties:
+        ticker: { type: string }
+        valido: { type: boolean }
+        nome: { type: string }
+        tipo: { type: string, enum: [ACAO, FII] }
+        setor: { type: string }
+        segmento: { type: string }
+    OperacaoRequest:
+      type: object
+      required: [ativoId, tipo, data, quantidade, valorTotal]
+      properties:
+        ativoId: { type: integer, format: int64 }
+        tipo: { type: string, enum: [COMPRA, VENDA] }
+        data: { type: string, format: date }
+        quantidade: { type: string, example: '10' }
+        valorTotal:
+          type: string
+          example: '2500.00'
+          description: Em compras, incrementa o Custo Total. Em vendas, representa o valor recebido informado pelo usuario e nao altera diretamente o Custo Total.
+        precoUnitario: { type: string, nullable: true }
+        taxas: { type: string, nullable: true }
+        comentario: { type: string, nullable: true }
+    Operacao:
+      allOf:
+        - $ref: '#/components/schemas/OperacaoRequest'
+        - type: object
+          properties:
+            id: { type: integer, format: int64 }
+    EventoRequest:
+      type: object
+      required: [ativoId, tipo, data]
+      properties:
+        ativoId: { type: integer, format: int64 }
+        tipo: { type: string, enum: [SPLIT, GRUPAMENTO, BONIFICACAO] }
+        data: { type: string, format: date }
+        proporcao: { type: string, nullable: true }
+        novaQuantidade: { type: string, nullable: true }
+        quantidadeRecebida: { type: string, nullable: true }
+        descricao: { type: string, nullable: true }
+    EventoCorporativo:
+      allOf:
+        - $ref: '#/components/schemas/EventoRequest'
+        - type: object
+          properties:
+            id: { type: integer, format: int64 }
+    ProventoRequest:
+      type: object
+      required: [ativoId, tipo, data, valorTotal]
+      properties:
+        ativoId: { type: integer, format: int64 }
+        tipo: { type: string, enum: [DIVIDENDO, JCP, RENDIMENTO, AMORTIZACAO] }
+        data: { type: string, format: date }
+        valorTotal: { type: string, example: '123.45' }
+        valorPorUnidade: { type: string, nullable: true }
+        comentario: { type: string, nullable: true }
+    Posicao:
+      type: object
+      description: Posicao calculada sob demanda. Posicoes zeradas sao omitidas por padrao nas listagens, exceto quando `incluirZeradas=true`.
+      properties:
+        carteiraId: { type: integer, format: int64 }
+        ativoId: { type: integer, format: int64 }
+        ticker: { type: string }
+        tipo: { type: string, enum: [ACAO, FII] }
+        quantidadeAtual: { type: string }
+        custoTotal: { type: string }
+        cotacaoAtual: { type: string, nullable: true }
+        valorMercado: { type: string, nullable: true }
+        pnlNaoRealizado: { type: string, nullable: true }
+        percentualAlocacao: { type: string, nullable: true }
+        cotacaoDesatualizada: { type: boolean }
+    CotacaoAtual:
+      type: object
+      properties:
+        ativoId: { type: integer, format: int64 }
+        preco: { type: string }
+        fonte: { type: string }
+        dataAtualizacao: { type: string, format: date-time }
+        desatualizada: { type: boolean }
+    Dashboard:
+      type: object
+      properties:
+        patrimonioTotal: { type: string }
+        pnlTotal: { type: string }
+        maiorPosicaoTicker: { type: string, nullable: true }
+        alocacaoPorClasse:
+          type: array
+          items:
+            type: object
+            properties:
+              classe: { type: string }
+              percentual: { type: string }
