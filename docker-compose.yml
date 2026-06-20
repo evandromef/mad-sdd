@@ -1,0 +1,51 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: mad-postgres
+    environment:
+      POSTGRES_DB: mad
+      POSTGRES_USER: ${DB_USER:-mad}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-mad}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-mad} -d mad"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    container_name: mad-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-jdbc:postgresql://postgres:5432/mad}
+      DB_USER: ${DB_USER:-mad}
+      DB_PASSWORD: ${DB_PASSWORD:-mad}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-900000}
+      JWT_REFRESH_EXPIRATION_MS: ${JWT_REFRESH_EXPIRATION_MS:-2592000000}
+      BRAPI_TOKEN: ${BRAPI_TOKEN}
+      BRAPI_BASE_URL: ${BRAPI_BASE_URL:-https://brapi.dev/api}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:4200}
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: mad-frontend
+    depends_on:
+      - backend
+    environment:
+      BACKEND_URL: ${BACKEND_URL:-http://localhost:8080}
+    ports:
+      - "4200:80"
+
+volumes:
+  postgres_data:

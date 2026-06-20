@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: mad-investimentos
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/mad}
+    username: ${DB_USER:mad}
+    password: ${DB_PASSWORD:mad}
+  flyway:
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: America/Sao_Paulo
+
+server:
+  port: ${PORT:8080}
+
+mad:
+  jwt:
+    secret: ${JWT_SECRET:}
+    expiration-ms: ${JWT_EXPIRATION_MS:900000}
+    refresh-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:2592000000}
+  brapi:
+    base-url: ${BRAPI_BASE_URL:https://brapi.dev/api}
+    token: ${BRAPI_TOKEN:}
+  frontend-url: ${FRONTEND_URL:http://localhost:4200}
