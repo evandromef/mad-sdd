@@ -23,6 +23,7 @@ O sistema é uma aplicação web voltada para o investidor pessoa física que de
 
 - cadastro de usuário com email ou conta google
 - cadastro de carteira de ativos
+- manutenção automática do catálogo de ativos de Ações e FIIs a partir de API externa
 - cadastro de operações de compra, venda e subscrição
 - cadastro de proventos (jcp, dividendos)
 - cadastro de bonificações
@@ -32,18 +33,21 @@ O sistema é uma aplicação web voltada para o investidor pessoa física que de
 - visualização do valor da carteira por categoria de ativo (fii, ação)
 - visualização do valor investido em cada ativo (custo de aquisição, valor atual)
 - visualização do valor recebido de provento (por carteira, por categoria, por ativo)
-- visualização da evolução da carteira (período: mês, ano)
+- visualização da evolução do custo de aquisição da carteira (período: mês, ano)
 
 **Não faz parte do escopo desta versão:**
 
 - Realizar operações de compra e venda de ativos (será uma ferramenta exclusivamente de registro, monitorização, análise e planeamento)
 - Realizar o registro automático de eventos cooporativos, proventos ou bonificações (o usuário terá total controle pelo cadastro desses eventos)
 - Importação automática de notas de corretagem (PDF)
+- Cadastro manual de ativos pelo usuário
 - Cálculo de IR (Imposto de Renda sobre operações)
 - Suporte a outros ativos (BDRs, ETFs, Renda Fixa, Cripto)
 - Alertas e notificações de eventos (pagamento de proventos, datas ex)
 - Exportação para declaração de IR na Receita Federal
 - Atualização em tempo real da cotação dos ativos (a atualização será diária)
+- Histórico de cotações dos ativos
+- Evolução histórica do valor de mercado da carteira ou do ativo, pois o plano gratuito da API Brapi não contempla histórico de cotações
 
 O escopo do MVP está definido no anexo escopo_mvp.md.
 
@@ -52,6 +56,8 @@ O escopo do MVP está definido no anexo escopo_mvp.md.
 | Termo | Definição |
 | --- | --- |
 | **Ativo** | Instrumento financeiro negociável na bolsa que pode ser adicionado à carteira do usuário (Ação ou FII, nesta versão). |
+| **Catálogo de Ativos** | Base mantida pelo sistema contendo os ativos disponíveis para seleção pelo usuário, limitada nesta versão a Ações e FIIs obtidos por integração com API externa. |
+| **Ativo Referenciado em Carteira** | Ativo que possui vínculo com ao menos uma carteira de usuário por meio de operação, provento, bonificação, evento corporativo ou posição registrada. |
 | **Ação** | Título que representa uma fração do capital social de uma empresa listada na B3. |
 | **FII (Fundo de Investimento Imobiliário)** | Fundo que investe em empreendimentos imobiliários ou títulos relacionados, negociado em bolsa. |
 | **Ticker / Código de Negociação** | Código alfanumérico que identifica um ativo na bolsa (ex.: PETR4, MXRF11). |
@@ -78,7 +84,7 @@ O escopo do MVP está definido no anexo escopo_mvp.md.
 
 ### 2.1 Perspectiva do Produto
 
-O sistema MAD irá funcionar de forma independente na interface web, consumindo APIs externas de cotações financeiras para atualização diária de preços dos ativos.
+O sistema MAD irá funcionar de forma independente na interface web, consumindo APIs externas de dados da bolsa brasilira para manutenção do catálogo de ativos e atualização diária de preços dos ativos referenciados em carteiras.
 
 ### 2.2 Funções do Produto (Resumo)
 
@@ -89,6 +95,7 @@ O sistema MAD irá funcionar de forma independente na interface web, consumindo 
   - proventos
   - eventos cooporativos
   - bonificações
+- Manter automaticamente o catálogo de ativos elegíveis para seleção pelo usuário
 - Painel de vizualização (dashboard)
 
 O escopo do MVP está definido no anexo escopo_mvp.md.
@@ -100,6 +107,7 @@ O escopo do MVP está definido no anexo escopo_mvp.md.
 ### 2.4 Restrições Gerais e Premissas
 
 - O sistema oferece suporte exclusivamente a ativos negociados na mercado brasileiro (apenas Ação e FII)
+- O usuário não cadastra ativos manualmente; os ativos disponíveis para seleção são mantidos pelo sistema a partir de API externa
 - Todos os valores monetários serão utilizados em tela no formato de Reais (BRL), com precisão de duas casas decimais
 - O cadastro de eventos (proventos, bonificações, eventos corporativos) é sempre manual, sob total responsabilidade do usuário
 - A atualização de cotações depende da disponibilidade e dos limites de uso de APIs externas de dados financeiros
@@ -192,11 +200,11 @@ O escopo do MVP está definido no anexo escopo_mvp.md.
 
 - **RF-031:** O sistema deve exibir, para cada ativo em carteira, a quantidade em posse, o custo de aquisição total, valor atual, P&L, rentabilidade e percentual de participação do valor atual total da carteira
 
-- **RF-032:** O sistema deve exibir a evolução do valor da carteira ao longo do tempo, com granularidade selecionável por mês ou por ano, apresentando tanto o custo de aquisição (valor investido) quanto o valor atual de mercado em cada ponto do período, para fins de comparação. A apresentação será por indicadores ou tabelas
+- **RF-032:** O sistema deve exibir a evolução do custo de aquisição da carteira ao longo do tempo, com granularidade selecionável por mês ou por ano, considerando as operações, vendas, subscrições, bonificações e eventos corporativos registrados até cada ponto do período. A apresentação será por indicadores ou tabelas.
 
 - **RF-033:** O sistema deve exibir o total de proventos recebidos, com filtros por carteira, por categoria de ativo e por ativo individual, permitindo seleção de período
 
-- **RF-034:** O sistema deve atualizar diariamente as cotações dos ativos cadastrados nas carteiras dos usuários, por meio de integração com API externa de dados financeiros
+- **RF-034:** O sistema deve atualizar diariamente as cotações somente dos ativos referenciados em carteiras de usuários, por meio de integração com API externa de dados financeiros
 
 - **RF-035 [Maior posição]:** O sistema deve identificar e exibir o ativo com maior participação percentual no valor atual da carteira selecionada.
 
@@ -212,9 +220,15 @@ O escopo do MVP está definido no anexo escopo_mvp.md.
 
 - **RF-040 [Notas por ativo]:** O sistema deve permitir que o usuário crie, edite, consulte e exclua notas pessoais vinculadas a um ativo de uma carteira
 
-- **RF-041 [Snapshot mensal]:** O sistema deve registrar, para cada ativo mantido em carteira, um snapshot mensal contendo competência, cotação de referência e data/hora da cotação utilizada, preservando os snapshots anteriores.
+### 3.9 Catálogo de Ativos
 
-- **RF-042 [Evolução patrimonial histórica]:** O sistema deve apresentar a evolução histórica do valor de mercado da carteira utilizando os snapshots mensais e a posição histórica correspondente. Na granularidade mensal, cada ponto deve representar o encerramento da respectiva competência. Na granularidade anual, cada ponto deve utilizar o snapshot de dezembro ou, na sua ausência, o último snapshot mensal disponível no respectivo ano. Snapshots já consolidados não devem ser alterados retroativamente. A apresentação será por indicadores ou tabelas
+- **RF-041:** O sistema deve manter um catálogo de ativos elegíveis, contendo Ações e FIIs do mercado brasileiro obtidos por integração com API externa.
+
+- **RF-042:** O sistema deve executar carga inicial do catálogo de ativos, cadastrando no banco de dados os ativos retornados pela API externa com, no mínimo, ticker, nome, categoria do ativo e status de negociação quando disponível.
+
+- **RF-043:** O sistema deve atualizar periodicamente o catálogo de ativos a partir da API externa, incluindo novos ativos e atualizando dados cadastrais de ativos existentes.
+
+- **RF-044:** O sistema deve permitir que o usuário selecione apenas ativos existentes no catálogo mantido pelo sistema ao cadastrar operações, proventos, bonificações ou eventos corporativos.
 
 ## 4. Requisitos Não-Funcionais (RNF)
 
@@ -268,14 +282,16 @@ Os requisitos de interface definem como o sistema se comunica com elementos exte
 
 ### 5.2 Interface de Software
 
-- O sistema deve integrar-se a uma API externa de cotações financeiras do mercado brasileiro para obtenção diária dos preços de Ações e FIIs
+- O sistema deve integrar-se a uma API externa de dados financeiros do mercado brasileiro para manutenção do catálogo de ativos e obtenção diária dos preços de Ações e FIIs
+- A rotina de atualização diária de cotações deve filtrar os ativos pelo uso efetivo em carteiras de usuários, evitando chamadas externas para ativos não referenciados
+- A rotina de atualização diária de cotações deve consultar um ativo por vez, respeitando as limitações do plano gratuito da API externa
 - O sistema deve integrar-se ao provedor de identidade Google, via protocolo OAuth 2.0 / OpenID Connect, para permitir o login social e a criação automática de conta no primeiro acesso
 - As demais integrações de software (banco de dados, serviços de e-mail, provedores de autenticação) devem ser detalhadas em documento específico de arquitetura, fora do escopo deste ERS
 
 ### 5.3 Interface de Comunicação
 
 - A comunicação entre o frontend e o backend do sistema deve ocorrer via protocolo HTTPS, utilizando API REST com formato de mensagens JSON
-- A comunicação com a API externa de cotações deve seguir o protocolo e formato definidos pelo provedor escolhido, documentados no anexo de integrações
+- A comunicação com a API externa de dados financeiros deve seguir o protocolo e formato definidos pelo provedor escolhido, documentados no anexo de integrações
 - O sistema deve implementar tratamento de timeout e reenvio (retry) controlado para chamadas a serviços externos, evitando bloqueio da experiência do usuário
 
 ## 6. Regras de Negócio (RN)
@@ -294,7 +310,7 @@ Os requisitos de interface definem como o sistema se comunica com elementos exte
 
 - **RN-007 [Datas Retroativas]:** O sistema deve permitir o cadastro de operações, proventos, bonificações e eventos corporativos com data retroativa, mesmo que seja anterior à data de criação da carteira
 
-- **RN-008 [Categoria do Ativo]:** O usuário não cadastra ativo, o sistema irá cadastrar e manter atualizado os ativos por API Externa
+- **RN-008 [Cadastro de Ativos]:** O usuário não cadastra ativos manualmente. O sistema deve manter um catálogo de ativos de Ações e FIIs obtido por API externa, e o usuário apenas seleciona ativos previamente cadastrados nesse catálogo.
 
 - **RN-009 [Exclusão em Cascata]:** A exclusão de uma carteira, operação ou a remoção de um ativo da carteira que possua registros vinculados (proventos, bonificações, eventos corporativos) somente deve ocorrer mediante confirmação explícita do usuário sobre a exclusão em cascata desses registros
 
@@ -304,27 +320,32 @@ Os requisitos de interface definem como o sistema se comunica com elementos exte
 
 - **RN-012 [Precisão Monetária]:** Cálculos monetários devem preservar a precisão decimal durante todo o processamento, sem arredondamentos intermediários. Valores em BRL devem ser arredondados para duas casas decimais somente nas bordas de exibição e resposta da API
 
-- **RN-013 [Evolução Patrimonial Histórica]:** Para calcular o valor de mercado de uma carteira em cada competência mensal, o sistema deve utilizar a quantidade histórica de cada ativo existente ao final do último dia da respectiva competência, considerando todas as operações, bonificações e eventos corporativos ocorridos até essa data, multiplicada pela cotação de referência do snapshot mensal correspondente. A posição atual não deve ser utilizada para recalcular competências anteriores.
+- **RN-013 [Evolução do Custo de Aquisição]:** Para calcular a evolução do custo de aquisição de uma carteira em cada competência mensal, o sistema deve utilizar o custo de aquisição histórico de cada ativo ao final do último dia da respectiva competência, considerando todas as operações, vendas e subscrições ocorridas até essa data. Bonificações, desdobramentos e grupamentos alteram quantidade, mas não alteram o Custo de Aquisição Total. A posição atual não deve ser utilizada para recalcular competências anteriores.
 
 - **RN-014 [P&L]:** O P&L de um ativo deve corresponder ao seu valor atual de mercado menos seu Custo de Aquisição Total. O P&L consolidado deve corresponder à soma dos P&Ls dos ativos considerados.
 
 - **RN-015 [Rentabilidade]:** A rentabilidade deve ser calculada pela divisão do P&L pelo Custo de Aquisição Total, multiplicada por 100. Quando o Custo de Aquisição Total for zero, a rentabilidade percentual não deve ser calculada, devendo ser apresentada como indisponível. Não inclui proventos recebidos.
 
-- **RN-016 [Consolidação Anual da Evolução Patrimonial]:** Para cada ano, o valor patrimonial apresentado deve corresponder ao último snapshot mensal disponível naquele ano, associado à posição histórica da mesma competência. O sistema não deve calcular o valor anual pela média ou soma dos valores mensais.
+- **RN-016 [Consolidação Anual da Evolução do Custo de Aquisição]:** Para cada ano, o custo de aquisição apresentado deve corresponder ao custo de aquisição histórico ao final da última competência mensal disponível naquele ano. O sistema não deve calcular o valor anual pela média ou soma dos valores mensais.
+
+- **RN-017 [Escopo da Atualização de Cotações]:** A atualização diária de cotações deve considerar apenas ativos referenciados em ao menos uma carteira de usuário. Ativos presentes apenas no catálogo, sem vínculo com carteiras, não devem ter cotação atualizada pela rotina diária.
+
+- **RN-018 [Consulta Unitária de Cotações]:** A atualização diária de cotações deve realizar uma chamada por ativo, sem agrupar múltiplos tickers na mesma requisição, respeitando as limitações do plano gratuito da API externa.
 
 ## 7. Referências e Anexos
 
-- ESPEC 01 - Cadastro de Usuário e Autenticação
-- ESPEC 02 - Cadastro e Gestão de Carteiras
-- ESPEC 03 - Cadastro de Operações (Compra, Venda e Subscrição)
-- ESPEC 04 - Cadastro de Proventos (Dividendos e JCP)
-- ESPEC 05 - Cadastro de Bonificações
-- ESPEC 06 - Cadastro de Eventos Corporativos (Desdobramento e Grupamento)
-- ESPEC 07 - Dashboard e Visualizações de Carteira
-- ESPEC 08 - Histórico e Detalhamento do Ativo
-- Documento de Escopo do MVP (escopo_mvp.md)
-- Documento de Arquitetura (Stack) do Sistema (a ser elaborado)
-- Documento de Integrações Externas (API de Cotações) (a ser elaborado)
+- [ESPEC 01 - Cadastro de Usuário e Autenticação](./especs/ESPEC_01_conta-e-acesso.md)
+- [ESPEC 02 - Cadastro e Gestão de Carteiras](./especs/ESPEC_02_carteiras.md)
+- [ESPEC 03 - Cadastro de Operações (Compra, Venda e Subscrição)](./especs/ESPEC_03_operacoes.md)
+- [ESPEC 04 - Cadastro de Proventos (Dividendos e JCP)](./especs/ESPEC_04_proventos.md)
+- [ESPEC 05 - Cadastro de Bonificações](./especs/ESPEC_05_bonificacoes.md)
+- [ESPEC 06 - Cadastro de Eventos Corporativos (Desdobramento e Grupamento)](./especs/ESPEC_06_eventos-corporativos.md)
+- [ESPEC 07 - Dashboard e Visualizações de Carteira](./especs/ESPEC_07_dashboard.md)
+- [ESPEC 08 - Histórico e Detalhamento do Ativo](./especs/ESPEC_08_detalhe-do-ativo.md)
+- [ESPEC 09 - Catálogo de Ativos](./especs/ESPEC_09_catalogo-de-ativos.md)
+- [Documento de Escopo do MVP](escopo_mvp.md)
+- [Documento de Arquitetura (Stack) do Sistema](./../arquitetura/documento_arquitetura_MAD.md)
+- [Documento de Integrações Externas da API  Bolsa do Brasil](./../integracoes/integracao_api_bolsa_brasil.md)
 
 ## Considerações Gerais
 

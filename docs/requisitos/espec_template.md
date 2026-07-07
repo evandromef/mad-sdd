@@ -1,6 +1,6 @@
 # ESPEC [Número] - [Nome da Funcionalidade]
 
-> **Como usar este template:** copie este arquivo para `ESPEC_0X_nome-da-funcionalidade.md`, preencha cada seção e remova os comentários em itálico de orientação. Cada ESPEC deve ser autocontida — um desenvolvedor ou agente de IA deve conseguir implementar a funcionalidade lendo apenas este arquivo + o ERS + o documento de arquitetura (quando referenciado na seção 13).
+> **Como usar este template:** copie este arquivo para `especs/ESPEC_0X_nome-da-funcionalidade.md`, preencha cada seção e remova os comentários em itálico de orientação. Cada ESPEC deve ser autocontida — um desenvolvedor ou agente de IA deve conseguir implementar a funcionalidade lendo apenas este arquivo + o ERS + o documento de arquitetura (quando referenciado na seção 13).
 >
 > **Sub-fluxos:** se a funcionalidade cobrir mais de uma variação de uma mesma ação (ex.: compra/venda/subscrição; desdobramento/grupamento), duplique as seções 6, 8 e 9.x para cada sub-fluxo, identificando claramente qual RF/RN cada bloco cobre. Não tente descrever variações diferentes em um único fluxo genérico.
 
@@ -115,7 +115,7 @@
 
 ### 9.2 Efeitos em Outras Entidades
 
-*Liste todo efeito colateral desta ação sobre outras entidades do sistema (carteira, ativo, snapshot mensal, posição histórica, etc.), já que estes recálculos automáticos (RF-014, RF-017, RF-022, RF-026 e equivalentes) não aparecem no Fluxo Principal, que é centrado na ótica do usuário.*
+*Liste todo efeito colateral desta ação sobre outras entidades do sistema (carteira, ativo, posição materializada, posição histórica, etc.), já que estes recálculos automáticos (RF-014, RF-017, RF-022, RF-026 e equivalentes) não aparecem no Fluxo Principal, que é centrado na ótica do usuário.*
 
 - **Entidade afetada:** *(ex.: Posição do ativo na carteira)*
   - **O que muda:** *(ex.: quantidade e custo de aquisição total recalculados)*

@@ -55,22 +55,26 @@ No MVP, os dados serão apresentados por indicadores ou tabelas; suas representa
 
 - Resumo do patrimônio total (Ações + FIIs)
 - Distribuição da carteira por ativo e por categoria de ativo
-- Evolução do patrimônio ao longo do tempo
+- Evolução do custo de aquisição ao longo do tempo
 - Resumo de proventos recebidos por mês
 - Indicadores: rentabilidade e maior posição
 
-### F07 — Integração com API de Cotações
+### F07 — Integração com API da Bolsa Brasil
 
-- Integração com API externa de cotações (ex: Brapi, B3, Yahoo Finance) para obter o preço atual dos ativos
-- Atualização automática diária das cotações de todos os ativos da carteira
+- Integração com API externa de dados financeiros (ex: Brapi, B3, Yahoo Finance) para manter o catálogo de Ações e FIIs e obter o preço atual dos ativos
+- Carga inicial automática do catálogo de ativos elegíveis, sem cadastro manual de ativos pelo usuário
+- Atualização periódica do catálogo de ativos, incluindo novos ativos e atualizando dados cadastrais existentes
+- Atualização automática diária das cotações somente dos ativos referenciados em carteiras de usuários
 - Cálculo automático do lucro/prejuízo não realizado (P&L) com base na última cotação válida disponivel
-- Armazenamento da cotação diária atual (sobrescrita a cada atualização) e de um snapshot mensal histórico por ativo, usado para gerar a evolução do patrimônio
+- Armazenamento apenas da cotação atual por ativo, sobrescrita a cada atualização válida
 - Tratamento de falha na API: manter última cotação válida e exibir indicador de "cotação desatualizada"
 
-## 2 Funcionalidades Fora do Escopo do MVP (Futuras)
+## 2. Funcionalidades Fora do Escopo do MVP (Futuras)
 
 - Atualização sob demanda das cotações
-- Gráficos de evolução patrimonial, distribuição da carteira, etc
+- Histórico de cotações dos ativos
+- Evolução histórica do valor de mercado da carteira ou do ativo
+- Gráficos de evolução do valor de mercado, distribuição da carteira, etc
 - Importação automática de notas de corretagem (PDF)
 - Cálculo de IR (Imposto de Renda sobre operações)
 - Suporte a outros ativos (BDRs, ETFs, Renda Fixa, Cripto)
