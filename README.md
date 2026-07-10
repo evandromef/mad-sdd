@@ -21,52 +21,16 @@ Algumas regras centrais do domínio:
 
 ```text
 .
+├── codebase/
 ├── docs/
 │   ├── arquitetura/
 │   │   ├── adr/
-│   │   │   ├── README.md
-│   │   │   ├── adr-001-estilo-arquitetural.md
-│   │   │   ├── adr-002-banco-de-dados.md
-│   │   │   ├── adr-003-provedor-oauth.md
-│   │   │   ├── adr-004-provedor-cotacoes.md
-│   │   │   └── adr-005-estrategia-autenticacao.md
 │   │   ├── documento_arquitetura_MAD.md
 │   │   └── modelo_dados.md
 │   ├── desenvolvimento/
 │   │   ├── epicos/
-│   │   │   ├── README.md
-│   │   │   ├── EPICO-01-fundacao-tecnica.md
-│   │   │   ├── EPICO-02-conta-e-acesso.md
-│   │   │   ├── EPICO-03-catalogo-e-cotacoes.md
-│   │   │   ├── EPICO-04-carteiras.md
-│   │   │   ├── EPICO-05-posicao-e-operacoes.md
-│   │   │   ├── EPICO-06-eventos-proventos-e-notas.md
-│   │   │   └── EPICO-07-dashboard-e-detalhe.md
 │   │   ├── sprints/
-│   │   │   ├── README.md
-│   │   │   ├── SPRINT-00-fundacao.md
-│   │   │   ├── SPRINT-01-conta-e-acesso.md
-│   │   │   ├── SPRINT-02-catalogo-de-ativos.md
-│   │   │   ├── SPRINT-03-carteiras-e-base-posicao.md
-│   │   │   ├── SPRINT-04-operacoes-e-motor-posicao.md
-│   │   │   ├── SPRINT-05-bonificacoes-e-eventos.md
-│   │   │   ├── SPRINT-06-proventos-e-notas.md
-│   │   │   ├── SPRINT-07-cotacoes-e-indicadores.md
-│   │   │   ├── SPRINT-08-dashboard-e-detalhe.md
-│   │   │   └── SPRINT-09-hardening-mvp.md
 │   │   ├── tasks/
-│   │   │   ├── backlog/
-│   │   │   ├── sprint-00/
-│   │   │   ├── sprint-01/
-│   │   │   ├── sprint-02/
-│   │   │   ├── sprint-03/
-│   │   │   ├── sprint-04/
-│   │   │   ├── sprint-05/
-│   │   │   ├── sprint-06/
-│   │   │   ├── sprint-07/
-│   │   │   ├── sprint-08/
-│   │   │   ├── sprint-09/
-│   │   │   └── README.md
 │   │   ├── README.md
 │   │   ├── checkpoint.md
 │   │   └── roadmap.md
@@ -74,15 +38,6 @@ Algumas regras centrais do domínio:
 │   │   └── integracao_api_bolsa_brasil.md
 │   └── requisitos/
 │       ├── especs/
-│       │   ├── ESPEC_01_conta-e-acesso.md
-│       │   ├── ESPEC_02_carteiras.md
-│       │   ├── ESPEC_03_operacoes.md
-│       │   ├── ESPEC_04_proventos.md
-│       │   ├── ESPEC_05_bonificacoes.md
-│       │   ├── ESPEC_06_eventos-corporativos.md
-│       │   ├── ESPEC_07_dashboard.md
-│       │   ├── ESPEC_08_detalhe-do-ativo.md
-│       │   └── ESPEC_09_catalogo-de-ativos.md
 │       ├── ers.md
 │       ├── escopo_mvp.md
 │       └── espec_template.md
@@ -96,9 +51,10 @@ Algumas regras centrais do domínio:
 
 ### Descrição dos principais diretórios e arquivos
 
+- `codebase/`: diretório reservado para o código da aplicação, incluindo backend, frontend, infraestrutura local e artefatos operacionais.
 - `docs/`: documentação funcional, arquitetural e técnica que orienta as implementações.
 - `docs/requisitos/`: requisitos do sistema, escopo do MVP e especificações detalhadas por funcionalidade.
-- `docs/requisitos/especs/`: especificações funcionais detalhadas já iniciadas.
+- `docs/requisitos/especs/`: especificações funcionais detalhadas do MVP.
 - `docs/arquitetura/`: visão arquitetural, stack tecnológica, responsabilidades das camadas e modelo de dados.
 - `docs/arquitetura/adr/`: decisões arquiteturais registradas, como estilo arquitetural, banco de dados, OAuth, cotações e autenticação.
 - `docs/desenvolvimento/`: planejamento de execução do MVP, com roadmap, checkpoint, épicos, sprints e organização de tasks.
