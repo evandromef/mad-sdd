@@ -32,9 +32,46 @@ Algumas regras centrais do domínio:
 │   │   │   └── adr-005-estrategia-autenticacao.md
 │   │   ├── documento_arquitetura_MAD.md
 │   │   └── modelo_dados.md
+│   ├── desenvolvimento/
+│   │   ├── epicos/
+│   │   │   ├── README.md
+│   │   │   ├── EPICO-01-fundacao-tecnica.md
+│   │   │   ├── EPICO-02-conta-e-acesso.md
+│   │   │   ├── EPICO-03-catalogo-e-cotacoes.md
+│   │   │   ├── EPICO-04-carteiras.md
+│   │   │   ├── EPICO-05-posicao-e-operacoes.md
+│   │   │   ├── EPICO-06-eventos-proventos-e-notas.md
+│   │   │   └── EPICO-07-dashboard-e-detalhe.md
+│   │   ├── sprints/
+│   │   │   ├── README.md
+│   │   │   ├── SPRINT-00-fundacao.md
+│   │   │   ├── SPRINT-01-conta-e-acesso.md
+│   │   │   ├── SPRINT-02-catalogo-de-ativos.md
+│   │   │   ├── SPRINT-03-carteiras-e-base-posicao.md
+│   │   │   ├── SPRINT-04-operacoes-e-motor-posicao.md
+│   │   │   ├── SPRINT-05-bonificacoes-e-eventos.md
+│   │   │   ├── SPRINT-06-proventos-e-notas.md
+│   │   │   ├── SPRINT-07-cotacoes-e-indicadores.md
+│   │   │   ├── SPRINT-08-dashboard-e-detalhe.md
+│   │   │   └── SPRINT-09-hardening-mvp.md
+│   │   ├── tasks/
+│   │   │   ├── backlog/
+│   │   │   ├── sprint-00/
+│   │   │   ├── sprint-01/
+│   │   │   ├── sprint-02/
+│   │   │   ├── sprint-03/
+│   │   │   ├── sprint-04/
+│   │   │   ├── sprint-05/
+│   │   │   ├── sprint-06/
+│   │   │   ├── sprint-07/
+│   │   │   ├── sprint-08/
+│   │   │   ├── sprint-09/
+│   │   │   └── README.md
+│   │   ├── README.md
+│   │   ├── checkpoint.md
+│   │   └── roadmap.md
 │   ├── integracoes/
-│   │   ├── integracao_api_bolsa_brasil.md
-│   │   └── integracao_api_bolsa_brasil_template.md
+│   │   └── integracao_api_bolsa_brasil.md
 │   └── requisitos/
 │       ├── especs/
 │       │   ├── ESPEC_01_conta-e-acesso.md
@@ -64,6 +101,7 @@ Algumas regras centrais do domínio:
 - `docs/requisitos/especs/`: especificações funcionais detalhadas já iniciadas.
 - `docs/arquitetura/`: visão arquitetural, stack tecnológica, responsabilidades das camadas e modelo de dados.
 - `docs/arquitetura/adr/`: decisões arquiteturais registradas, como estilo arquitetural, banco de dados, OAuth, cotações e autenticação.
+- `docs/desenvolvimento/`: planejamento de execução do MVP, com roadmap, checkpoint, épicos, sprints e organização de tasks.
 - `docs/integracoes/`: contratos e diretrizes de integração com APIs externas, atualmente focados na API da Bolsa Brasil via Brapi.
 - `logs/atividades/`: registros diários das atividades realizadas no projeto.
 - `AGENTS.md`: instruções de trabalho para agentes de IA neste repositório.
