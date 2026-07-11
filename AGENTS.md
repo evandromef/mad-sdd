@@ -18,7 +18,7 @@ Todas as implementacoes devem seguir as specs em `docs/` antes de gerar codigo.
 - Nunca calcular nem persistir preco medio como regra de negocio.
 - Eventos corporativos e bonificacoes alteram quantidade, nunca o Custo Total.
 
-## Plano de Desenvolvimento
+## Plano e fluxo de Desenvolvimento
 
 - O plano de desenvolvimento do MVP fica em `docs/desenvolvimento/`.
 - Antes de iniciar uma atividade de desenvolvimento, consulte:
@@ -35,6 +35,10 @@ Todas as implementacoes devem seguir as specs em `docs/` antes de gerar codigo.
   - arquivos em andamento.
 - Nao use `checkpoint.md` como historico permanente. Historico duradouro deve ficar em `logs/atividades/`, arquivos de sprint e tasks.
 - Arquivos de task devem ser criados em `docs/desenvolvimento/tasks/` apenas depois da aprovacao das ESPECs relacionadas e antes da criacao da branch da sprint.
+- Cada task de sprint deve possuir exatamente um status: `Planejada`, `Em andamento`, `Em revisao` ou `Concluida`.
+- Após concluir o desenvolvimento de uma task aguardar revisão.
+- A task só deve ser marcada como concluida após aprovação direta.
+- Não iniciar nova task se houver outra task em andamento ou em revisão.
 
 ## Fluxo de Planejamento e Execucao
 
@@ -70,7 +74,12 @@ Todas as implementacoes devem seguir as specs em `docs/` antes de gerar codigo.
 ESPEC aprovada
     -> sprint detalhada em tasks
     -> branch da sprint criada
-    -> implementacao
+    -> task em andamento
+    -> implementacao e testes
+    -> task em revisao
+    -> aprovacao explicita da task
+    -> task concluida
+    -> proxima task
 ```
 
 ## Documentação de referência

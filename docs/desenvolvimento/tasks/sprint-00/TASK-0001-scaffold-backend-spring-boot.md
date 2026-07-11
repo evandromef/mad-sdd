@@ -53,10 +53,16 @@ A Sprint 0 prepara a fundacao tecnica para que as funcionalidades das sprints se
 
 ## Status
 
-- [x] Planejada
+- [ ] Planejada
 - [ ] Em andamento
 - [ ] Em revisao
 - [x] Concluida
+
+## Aprovacao
+
+- Aprovada por: Evandro Moreira
+- Data: 2026-07-11
+- Evidencia: confirmacao explicita de que a TASK-0001 esta concluida.
 
 ## Notas de implementacao
 

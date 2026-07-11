@@ -23,6 +23,8 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - Todo codigo da aplicacao deve ficar dentro de `codebase/`; documentacao e logs permanecem em `docs/` e `logs/`.
 - O plano usara 9 sprints efetivas mais a Sprint 0.
 - Spring Boot 3.5.x sera usado por oferecer suporte ao Java 25 sem migrar para Spring Boot 4.
+- O fluxo de revisao e aprovacao se aplica somente ao desenvolvimento das tasks das sprints.
+- A TASK-0001 esta aprovada e concluida.
 
 ## Contexto importante
 
@@ -40,5 +42,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-10 17:12 America/Sao_Paulo
+- Data/hora: 2026-07-11 10:02 America/Sao_Paulo
 - Responsavel: Codex

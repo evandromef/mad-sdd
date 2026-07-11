@@ -2,7 +2,7 @@
 
 Este diretorio agrupa tasks por sprint.
 
-Arquivos de task individuais ainda nao foram criados. Eles devem ser adicionados quando a respectiva sprint ou backlog forem detalhados.
+As tasks da Sprint 0 estao detalhadas em `sprint-00/`. Novas tasks devem ser adicionadas quando a respectiva sprint ou backlog forem detalhados e as ESPECs relacionadas estiverem aprovadas.
 
 ## Convencao sugerida
 
@@ -40,11 +40,26 @@ Arquivos de task individuais ainda nao foram criados. Eles devem ser adicionados
 
 ## Status
 
-- [ ] Planejada
+- [x] Planejada
 - [ ] Em andamento
 - [ ] Em revisao
 - [ ] Concluida
 
+## Aprovacao
+
+- Aprovada por:
+- Data:
+- Evidencia:
+
 ## Notas de implementacao
 ```
 
+## Fluxo de status
+
+`Planejada -> Em andamento -> Em revisao -> Concluida`.
+
+- **Cada task de sprint deve possuir exatamente um status**
+- Ao concluir implementacao e testes, a task deve ficar `Em revisao`.
+- Somente aprovacao explicita do usuario referente a task permite marca-la como `Concluida`.
+- Se houver ajustes na revisao, a task retorna para `Em andamento`.
+- Apenas uma task de sprint pode estar `Em andamento` ou `Em revisao` por vez.
