@@ -56,9 +56,11 @@ A Sprint 0 prepara a fundacao tecnica para que as funcionalidades das sprints se
 - [x] Planejada
 - [ ] Em andamento
 - [ ] Em revisao
-- [ ] Concluida
+- [x] Concluida
 
 ## Notas de implementacao
 
 - Nao implementar endpoints de negocio nesta task.
 - Evitar dependencias nao previstas na arquitetura sem novo registro de decisao.
+- Implementado com Spring Boot 3.5.15 e Java 25.
+- Teste executado com sucesso em 2026-07-10 usando o JDK de `/usr/lib/jvm/java-25-openjdk-amd64`.

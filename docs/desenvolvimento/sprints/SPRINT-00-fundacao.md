@@ -6,7 +6,7 @@ Preparar a base tecnica do projeto para desenvolvimento seguro e repetivel.
 
 ## Periodo
 
-- Inicio:
+- Inicio: 2026-07-10
 - Fim:
 
 ## Epicos relacionados
@@ -26,7 +26,7 @@ Preparar a base tecnica do projeto para desenvolvimento seguro e repetivel.
 
 | Task | Descricao | Status | Responsavel |
 | --- | --- | --- | --- |
-| [TASK-0001](../tasks/sprint-00/TASK-0001-scaffold-backend-spring-boot.md) | Scaffold do backend Spring Boot. | Planejada | |
+| [TASK-0001](../tasks/sprint-00/TASK-0001-scaffold-backend-spring-boot.md) | Scaffold do backend Spring Boot. | Concluida | Codex |
 | [TASK-0002](../tasks/sprint-00/TASK-0002-scaffold-frontend-angular.md) | Scaffold do frontend Angular. | Planejada | |
 | [TASK-0003](../tasks/sprint-00/TASK-0003-banco-flyway-primeira-migration.md) | Banco local, Flyway e primeira migration. | Planejada | |
 | [TASK-0004](../tasks/sprint-00/TASK-0004-docker-compose-desenvolvimento.md) | Docker Compose de desenvolvimento. | Planejada | |
