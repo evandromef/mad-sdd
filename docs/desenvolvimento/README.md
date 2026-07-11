@@ -9,6 +9,7 @@ Este diretorio organiza o plano Scrum do MVP do MAD.
 - `epicos/`: documentos dos epicos do produto.
 - `sprints/`: planejamento, acompanhamento e fechamento de cada sprint.
 - `tasks/`: area reservada para tasks detalhadas por sprint.
+- `padroes/`: padroes, boas praticas, conceitos e definicoes aprendidos nas revisoes tecnicas.
 
 ## Uso recomendado
 

@@ -82,6 +82,23 @@ ESPEC aprovada
     -> proxima task
 ```
 
+## Revisao Tecnica e Documentacao de Aprendizados
+
+- Apos uma task ser colocada em `Em revisao`, um agente diferente daquele que implementou a task pode realizar uma revisao tecnica complementar.
+- Essa revisao nao substitui a aprovacao explicita do usuario e nao altera o fluxo principal de desenvolvimento.
+- O agente revisor deve analisar a task implementada e documentar padroes, boas praticas, conceitos e definicoes relevantes usados na solucao.
+- A revisao deve priorizar conhecimento reutilizavel para futuras tasks, sem duplicar documentacao ja existente.
+- Quando identificar um padrao ou decisao recorrente, o agente revisor deve sugerir onde documentar:
+  - `docs/desenvolvimento/padroes/` para padroes de implementacao e boas praticas do projeto;
+  - `docs/arquitetura/adr/` para decisoes arquiteturais relevantes;
+  - arquivo da sprint em `docs/desenvolvimento/sprints/` para observacoes especificas da sprint;
+  - arquivo da task em `docs/desenvolvimento/tasks/` para notas especificas da task.
+- O agente revisor nao deve iniciar nova implementacao nem assumir a task em desenvolvimento.
+- Se a revisao encontrar problema funcional, tecnico ou de teste, deve registrar o achado como item de revisao.
+- Se a revisao gerar nova documentacao, a atividade deve ser registrada em `logs/atividades/`.
+- A documentacao produzida deve ser objetiva, rastreavel e vinculada a task, sprint, ESPEC ou ADR relevante.
+- O agente revisor não deve alterar o status da task.
+
 ## Documentação de referência
 
 Antes de implementar código, consulte as especificações em `docs/`, especialmente:
