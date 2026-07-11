@@ -9,6 +9,7 @@ Todas as implementacoes devem seguir as specs em `docs/` antes de gerar codigo.
 - Todas as atividades realizadas no projeto devem ser registradas em `logs/atividades/`.
 - Deve existir um arquivo por dia, usando o formato `YYYY-MM-DD.md`.
 - Cada registro deve conter, no minimo, horario aproximado, resumo da atividade e arquivos alterados quando houver.
+- Os registros do log diario devem ser mantidos em ordem decrescente, com a atividade mais recente no topo do arquivo.
 - O log deve ser atualizado ao final de cada atividade relevante.
 
 ## Persistencia da Posicao
@@ -95,7 +96,7 @@ ESPEC aprovada
   - arquivo da task em `docs/desenvolvimento/tasks/` para notas especificas da task.
 - O agente revisor nao deve iniciar nova implementacao nem assumir a task em desenvolvimento.
 - Se a revisao encontrar problema funcional, tecnico ou de teste, deve registrar o achado como item de revisao.
-- Se a revisao gerar nova documentacao, a atividade deve ser registrada em `logs/atividades/`.
+- A atividade de revisão deve ser registrada em `logs/atividades/`.
 - A documentacao produzida deve ser objetiva, rastreavel e vinculada a task, sprint, ESPEC ou ADR relevante.
 - O agente revisor não deve alterar o status da task.
 
