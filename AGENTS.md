@@ -19,9 +19,49 @@ Todas as implementacoes devem seguir as specs em `docs/` antes de gerar codigo.
 - Nunca calcular nem persistir preco medio como regra de negocio.
 - Eventos corporativos e bonificacoes alteram quantidade, nunca o Custo Total.
 
+## Padrao de Engenharia do Agente Desenvolvedor
+
+### Padroes de Codigo
+
+- Seguir as convencoes do framework e da linguagem usados no modulo alterado.
+- Manter funcoes e metodos pequenos, preferencialmente com uma unica responsabilidade.
+- Evitar arquivos grandes ou com muitas responsabilidades. Separar por dominio, camada ou caso de uso quando necessario.
+- Usar nomes especificos e descritivos para classes, metodos, variaveis e arquivos.
+- Evitar nomes genericos como `data`, `handler`, `manager`, `utils` ou equivalentes quando houver nome de dominio mais claro.
+- Evitar duplicacao de codigo. Extrair logica compartilhada para modulo, servico ou funcao reutilizavel.
+- Preferir retornos antecipados quando isso reduzir aninhamento e melhorar legibilidade.
+- Mensagens de erro devem conter o valor invalido e o formato ou regra esperada quando aplicavel.
+- Nao introduzir comentarios obvios. Comentarios devem explicar contexto, decisao ou motivo.
+- Nao remover comentarios existentes sem verificar se documentam uma decisao, restricao ou contexto relevante.
+- Funcoes, classes ou metodos publicos relevantes devem ter documentacao curta explicando intencao e exemplo de uso quando isso ajudar o consumidor da API.
+
+### Padroes de Testes
+
+- Toda nova regra de negocio deve ter teste automatizado.
+- Correcoes de bugs devem incluir teste de regressao quando viavel.
+- Testes devem ser rapidos, independentes, repetiveis e auto-verificaveis.
+- I/O externo, APIs, banco de dados e filesystem devem ser isolados por mocks, fakes ou infraestrutura de teste apropriada.
+- Preferir fakes nomeados e reutilizaveis a stubs inline complexos.
+- Antes de finalizar uma alteracao, executar o comando padrao de testes do projeto ou registrar claramente por que nao foi executado.
+
+### Dependencias e Estruturas
+
+- Injetar dependencias por construtor, parametro ou mecanismo padrao do framework.
+- Evitar dependencias globais implicitas.
+- Bibliotecas externas devem ser acessadas por interfaces ou adaptadores do proprio projeto quando influenciarem regra de negocio, I/O externo ou integracoes.
+- Seguir a estrutura convencional do framework e os limites de responsabilidade ja existentes no projeto.
+- Preferir modulos pequenos e focados a arquivos genericos ou concentradores.
+
+### Formatacao
+
+- Usar o formatador padrao da linguagem ou framework do modulo alterado.
+- Nao discutir estilo quando houver formatador automatico configurado.
+- Nao misturar alteracoes de formatacao ampla com mudancas funcionais sem necessidade.
+
 ## Plano e fluxo de Desenvolvimento
 
 - O plano de desenvolvimento do MVP fica em `docs/desenvolvimento/`.
+- O agente desenvolvedor deve seguir o padrao de engenharia do projeto em toda implementacao.
 - Antes de iniciar uma atividade de desenvolvimento, consulte:
   - `docs/desenvolvimento/checkpoint.md`
   - `docs/desenvolvimento/roadmap.md`
