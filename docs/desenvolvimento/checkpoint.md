@@ -7,14 +7,16 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - Branch `codex/sprint-00-fundacao` criada.
 - Sprint 0 iniciada.
 - TASK-0001 concluida com build e teste automatizado aprovados no Java 25.
+- TASK-0002 implementada e colocada em revisao.
+- Frontend Angular 21 criado em `codebase/frontend/` com PrimeNG, Tailwind CSS, shell inicial e testes base.
 
 ## Proximo passo imediato
 
-- Iniciar a TASK-0002: scaffold do frontend Angular 21.
+- Aguardar revisao/aprovacao direta da TASK-0002 antes de marca-la como concluida ou iniciar nova task.
 
 ## Bloqueios
 
-- Nenhum bloqueio registrado.
+- TASK-0002 aguarda revisao/aprovacao direta do usuario para conclusao.
 
 ## Decisoes recentes
 
@@ -25,6 +27,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - Spring Boot 3.5.x sera usado por oferecer suporte ao Java 25 sem migrar para Spring Boot 4.
 - O fluxo de revisao e aprovacao se aplica somente ao desenvolvimento das tasks das sprints.
 - A TASK-0001 esta aprovada e concluida.
+- A TASK-0002 esta em revisao.
 
 ## Contexto importante
 
@@ -39,8 +42,9 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - `docs/desenvolvimento/`
 - `docs/desenvolvimento/tasks/sprint-00/`
 - `codebase/`
+- `codebase/frontend/`
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-11 10:02 America/Sao_Paulo
+- Data/hora: 2026-07-14 12:18 America/Sao_Paulo
 - Responsavel: Codex

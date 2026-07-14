@@ -54,9 +54,9 @@ O frontend deve ser uma aplicacao independente da API, conforme arquitetura do p
 
 ## Status
 
-- [x] Planejada
+- [ ] Planejada
 - [ ] Em andamento
-- [ ] Em revisao
+- [x] Em revisao
 - [ ] Concluida
 
 ## Notas de implementacao

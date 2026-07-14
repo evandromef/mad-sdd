@@ -1,0 +1,34 @@
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Navegacao principal">
+    <a class="brand" href="/" aria-label="MAD inicio">
+      <span class="brand-mark">M</span>
+      <span class="brand-copy">
+        <strong>MAD</strong>
+        <small>Investimentos</small>
+      </span>
+    </a>
+
+    <nav class="navigation">
+      @for (item of navigationItems; track item) {
+        <button type="button" class="navigation-item" [class.navigation-item-active]="item === 'Dashboard'">
+          {{ item }}
+        </button>
+      }
+    </nav>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Carteira selecionada</p>
+        <strong>Carteira Principal</strong>
+      </div>
+
+      <button pButton type="button" label="Nova operacao" icon="pi pi-plus"></button>
+    </header>
+
+    <main class="content">
+      <router-outlet />
+    </main>
+  </div>
+</div>
