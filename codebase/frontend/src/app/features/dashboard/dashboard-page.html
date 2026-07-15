@@ -21,26 +21,28 @@
       <p>Carteira Principal</p>
     </div>
 
-    <div class="positions-table" role="table" aria-label="Posição por ativo">
-      <div class="positions-row positions-header" role="row">
-        <span role="columnheader">Ativo</span>
-        <span role="columnheader">Categoria</span>
-        <span role="columnheader">Quantidade</span>
-        <span role="columnheader">Custo total</span>
-        <span role="columnheader">Valor atual</span>
-        <span role="columnheader">Alocação</span>
-      </div>
-
-      @for (position of positions; track position.ticker) {
-        <div class="positions-row" role="row">
-          <strong role="cell">{{ position.ticker }}</strong>
-          <span role="cell"><p-tag [value]="position.category" severity="secondary" /></span>
-          <span role="cell">{{ position.quantity }}</span>
-          <span role="cell">{{ position.acquisitionCost | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}</span>
-          <span role="cell">{{ position.currentValue | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}</span>
-          <span role="cell">{{ position.allocation | percent: '1.1-1' : 'pt-BR' }}</span>
+    <div class="positions-table-scroll">
+      <div class="positions-table" role="table" aria-label="Posição por ativo">
+        <div class="positions-row positions-header" role="row">
+          <span role="columnheader">Ativo</span>
+          <span role="columnheader">Categoria</span>
+          <span role="columnheader">Quantidade</span>
+          <span role="columnheader">Custo total</span>
+          <span role="columnheader">Valor atual</span>
+          <span role="columnheader">Alocação</span>
         </div>
-      }
+
+        @for (position of positions; track position.ticker) {
+          <div class="positions-row" role="row">
+            <strong role="cell">{{ position.ticker }}</strong>
+            <span role="cell"><p-tag [value]="position.category" severity="secondary" /></span>
+            <span role="cell">{{ position.quantity }}</span>
+            <span role="cell">{{ position.acquisitionCost | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}</span>
+            <span role="cell">{{ position.currentValue | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}</span>
+            <span role="cell">{{ position.allocation | percent: '1.1-1' : 'pt-BR' }}</span>
+          </div>
+        }
+      </div>
     </div>
   </section>
 </section>

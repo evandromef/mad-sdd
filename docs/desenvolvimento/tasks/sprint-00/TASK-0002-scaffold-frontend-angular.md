@@ -72,5 +72,6 @@ O frontend deve ser uma aplicacao independente da API, conforme arquitetura do p
 - Achado P2 resolvido: removida do `README.md` a instrucao `ng e2e`, pois o projeto ainda nao possui target ou script E2E; a configuracao do Playwright permanece no escopo da TASK-0006.
 - Validacao visual em viewport de 360px realizada pelo desenvolvedor, sem problemas na navegacao movel ou no shell inicial.
 - Textos visiveis e nomes acessiveis do shell inicial corrigidos para usar a acentuacao adequada em portugues.
+- Correcao responsiva aplicada na tabela de posicoes: a rolagem horizontal passou a ficar disponivel sempre que a largura da tabela exceder sua area, inclusive entre 760px e 1000px.
 - Observacao nao bloqueante: botoes sem acao e dados financeiros ficticios sao compativeis com o shell inicial, mas devem ser identificados, desabilitados ou substituidos quando as funcionalidades correspondentes forem implementadas.
 - A revisao tecnica nao altera o status da task, que permanece `Em revisao` ate aprovacao direta.

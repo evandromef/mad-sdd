@@ -11,6 +11,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - Frontend Angular 21 criado em `codebase/frontend/` com PrimeNG, Tailwind CSS, shell inicial e testes base.
 - Ajuste de revisao P2 aplicado na TASK-0002: teste base alinhado a Vitest com Angular Testing Library.
 - Achado P2 do README resolvido, validacao visual em 360px aprovada pelo desenvolvedor e textos visiveis corrigidos com acentuacao em portugues.
+- Corrigido o recorte da tabela de posicoes em larguras intermediarias com um contêiner de rolagem horizontal dedicado.
 
 ## Proximo passo imediato
 
@@ -49,5 +50,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-15 08:37 America/Sao_Paulo
+- Data/hora: 2026-07-15 09:48 America/Sao_Paulo
 - Responsavel: Codex
