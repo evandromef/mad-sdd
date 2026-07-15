@@ -1,14 +1,21 @@
 {
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Spring Boot-MadApplication<mad-api>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "br.com.mad.MadApplication",
-            "projectName": "mad-api",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Backend: Spring Boot",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/codebase/backend",
+      "mainClass": "br.com.mad.MadApplication",
+      "projectName": "mad-api"
+    },
+    {
+      "type": "chrome",
+      "name": "Frontend: Angular",
+      "request": "launch",
+      "preLaunchTask": "Frontend: iniciar",
+      "url": "http://localhost:4200/",
+      "webRoot": "${workspaceFolder}/codebase/frontend"
+    }
+  ]
 }
