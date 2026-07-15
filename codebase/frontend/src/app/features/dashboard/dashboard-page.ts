@@ -4,7 +4,7 @@ import { TagModule } from 'primeng/tag';
 
 type PositionSummary = {
   ticker: string;
-  category: 'Acao' | 'FII';
+  category: 'Ação' | 'FII';
   quantity: number;
   acquisitionCost: number;
   currentValue: number;
@@ -19,7 +19,7 @@ type PositionSummary = {
 })
 export class DashboardPage {
   protected readonly summaryCards = [
-    { label: 'Custo de aquisicao', value: 42840.36 },
+    { label: 'Custo de aquisição', value: 42840.36 },
     { label: 'Valor atual', value: 46192.11 },
     { label: 'P&L', value: 3351.75 }
   ];
@@ -27,7 +27,7 @@ export class DashboardPage {
   protected readonly positions: PositionSummary[] = [
     {
       ticker: 'PETR4',
-      category: 'Acao',
+      category: 'Ação',
       quantity: 300,
       acquisitionCost: 9680,
       currentValue: 10590,
@@ -43,7 +43,7 @@ export class DashboardPage {
     },
     {
       ticker: 'ITSA4',
-      category: 'Acao',
+      category: 'Ação',
       quantity: 900,
       acquisitionCost: 9240,
       currentValue: 10080,

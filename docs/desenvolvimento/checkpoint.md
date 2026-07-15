@@ -9,6 +9,8 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - TASK-0001 concluida com build e teste automatizado aprovados no Java 25.
 - TASK-0002 implementada e colocada em revisao.
 - Frontend Angular 21 criado em `codebase/frontend/` com PrimeNG, Tailwind CSS, shell inicial e testes base.
+- Ajuste de revisao P2 aplicado na TASK-0002: teste base alinhado a Vitest com Angular Testing Library.
+- Achado P2 do README resolvido, validacao visual em 360px aprovada pelo desenvolvedor e textos visiveis corrigidos com acentuacao em portugues.
 
 ## Proximo passo imediato
 
@@ -28,6 +30,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - O fluxo de revisao e aprovacao se aplica somente ao desenvolvimento das tasks das sprints.
 - A TASK-0001 esta aprovada e concluida.
 - A TASK-0002 esta em revisao.
+- Testes de componente do frontend devem usar Angular Testing Library sobre Vitest.
 
 ## Contexto importante
 
@@ -46,5 +49,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-14 12:18 America/Sao_Paulo
+- Data/hora: 2026-07-15 08:37 America/Sao_Paulo
 - Responsavel: Codex

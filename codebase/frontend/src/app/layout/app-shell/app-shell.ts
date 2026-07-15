@@ -9,5 +9,5 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './app-shell.css'
 })
 export class AppShell {
-  protected readonly navigationItems = ['Dashboard', 'Carteiras', 'Ativos', 'Lancamentos'];
+  protected readonly navigationItems = ['Dashboard', 'Carteiras', 'Ativos', 'Lançamentos'];
 }
