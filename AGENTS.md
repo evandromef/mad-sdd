@@ -4,6 +4,84 @@ Aplicacao web para investidores pessoa fisica controlarem carteiras de acoes e F
 O sistema substitui planilhas por cadastro estruturado de ativos, operacoes, eventos corporativos, proventos, cotacoes e dashboards.
 Todas as implementacoes devem seguir as specs em `docs/` antes de gerar codigo.
 
+## Referencias Obrigatorias e Regras Inviolaveis
+
+- O MAD e uma aplicacao web para controle de carteiras de Acoes e FIIs por investidores pessoa fisica.
+- O objetivo do projeto e substituir planilhas por registros estruturados, rastreaveis e consultaveis.
+- O MVP cobre cadastro de ativos via catalogo, carteiras, operacoes, eventos corporativos, proventos, cotacoes e dashboards.
+
+**Regra inegociável para o Codex:** nenhuma alteração de código ou geração de novo arquivo deve ser feita sem autorização explícita do desenvolvedor. O Codex deve sempre apresentar o que pretende fazer e aguardar aprovação antes de executar.
+
+### Stack Oficial
+
+- **Frontend:** Angular 21 LTS, Node.js 24 LTS e TypeScript.
+- **Backend:** Spring Boot 3 e Java 25 LTS.
+- **Banco de dados:** PostgreSQL 18.
+- **Dados de mercado:** Brapi.
+
+### Estrutura de Pastas
+
+- `codebase/frontend/`: aplicacao Angular.
+- `codebase/backend/`: API Spring Boot.
+- `docs/requisitos/`: ERS, escopo do MVP, template e ESPECs.
+- `docs/arquitetura/`: documento de arquitetura, modelo de dados e ADRs.
+- `docs/integracoes/`: contratos e diretrizes de integracoes externas.
+- `docs/desenvolvimento/`: roadmap, checkpoint, epicos, sprints, tasks e padroes.
+- `logs/atividades/`: log diario das atividades do projeto.
+
+### Convencoes de Nomenclatura
+
+- TypeScript: `camelCase` para variaveis, propriedades, funcoes e metodos; `PascalCase` para classes, componentes, tipos e interfaces exportadas.
+- Java: `PascalCase` para classes, records e enums; `camelCase` para metodos, parametros, variaveis e atributos.
+- SQL e banco de dados: `snake_case` para tabelas, colunas, indices e constraints.
+- Arquivos devem seguir a convencao do framework do modulo alterado.
+
+### Regras Funcionais Inegociaveis
+
+- Nunca calcular, persistir ou exibir preco medio como regra de negocio.
+- Sempre usar quantidade atual e Custo de Aquisicao Total para posicao.
+- Operacoes de venda reduzem Custo de Aquisicao Total proporcionalmente a quantidade vendida.
+- Bonificacoes, desdobramentos e grupamentos alteram quantidade, nunca Custo de Aquisicao Total.
+- Valores monetarios em BRL devem preservar precisao decimal no processamento e ser arredondados para 2 casas apenas na resposta da API e na exibicao.
+- A Brapi deve ser consumida apenas pelo backend e somente conforme o documento de integracao.
+- A rotina diaria de cotacoes deve consultar apenas ativos referenciados em carteiras e um ticker por chamada, respeitando o plano gratuito da Brapi.
+
+### Comandos Padrao
+
+- Execucao local integrada: `docker-compose up`, quando o compose de desenvolvimento estiver configurado.
+- Testes frontend: executar em `codebase/frontend/` com `npm test`.
+- Testes backend: executar em `codebase/backend/` com `mvn test`.
+- Se o comando padrao ainda nao estiver disponivel ou falhar por configuracao pendente, registrar claramente o motivo no final da atividade.
+
+### Contratos e Modelos
+
+- Contratos OpenAPI da API MAD: devem ficar em `docs/api/` quando a TASK-0005 for implementada. Enquanto isso, consultar a task `docs/desenvolvimento/tasks/sprint-00/TASK-0005-openapi-contrato-inicial-api.md`.
+- Modelo de dados atual: `docs/arquitetura/modelo_dados.md`.
+- Modelo de dominio: ainda nao ha documento dedicado; Gerar modelo de dominio antes de gerar Services ou Entities, consultar ERS, ESPECs relacionadas e modelo de dados.
+- Transicoes de estado: ainda nao ha documento dedicado; antes de gerar logica condicional baseada em status ou estado, consultar ESPECs, modelo de dados e tasks/sprints relacionadas.
+- Diagramas de sequencia: ainda nao ha pasta dedicada; antes de gerar servicos com multiplas camadas ou chamadas entre servicos, consultar ESPECs e arquitetura.
+- Catalogo de erros: ainda nao ha documento dedicado; nao inventar codigos ou mensagens globais sem antes propor/documentar o catalogo.
+- Testes de aceitacao: quando forem criados em Gherkin, devem ser derivados das ESPECs e usados como contrato executavel do comportamento esperado.
+- Arquitetura frontend/backend: enquanto nao houver documentos dedicados em `docs/frontend/` e `docs/backend/`, consultar `docs/arquitetura/documento_arquitetura_MAD.md` e `docs/desenvolvimento/padroes/`.
+- Documentos ainda inexistentes devem ser criados antes da primeira implementacao que dependa deles, conforme a necessidade da sprint/task.
+- Nao criar documentacao especulativa sem uso imediato, mas tambem nao implementar codigo que dependa de modelo de dominio, transicoes de estado, diagramas de sequencia, catalogo de erros, contratos de API ou arquitetura especifica sem antes documentar a referencia minima correspondente.
+- Sempre que um desses documentos previstos for criado, o agente deve sugerir a atualizacao deste `AGENTS.md` para substituir a referencia pendente pelo caminho definitivo do documento gerado.
+
+### Seguranca de Segredos
+
+- `BRAPI_TOKEN`, `JWT_SECRET`, credenciais de banco e qualquer outro segredo nunca podem aparecer como valores literais no codigo, documentacao operacional versionada, logs, testes ou exemplos.
+- No backend Java, segredos devem vir de propriedades externas, variaveis de ambiente ou mecanismo padrao do Spring, nunca de string hardcoded.
+- No frontend Angular, usar arquivos de environment apenas para configuracoes publicas, como URLs. Segredos reais nunca devem ir para o bundle.
+- E proibido gerar codigo semelhante a:
+
+  ```java
+  String token = "meu-token-brapi-123";
+  String secret = "minha-chave-jwt";
+  ```
+
+- Clientes de integracao nunca devem cachear valores de segredo.
+- `BrapiClient` ou equivalente deve ser acessado por servicos/adaptadores do projeto, com deduplicacao de tickers, respeito a rate limit, timeout, retry controlado e consulta previa ao estado ja persistido quando aplicavel.
+
 ## Log de Atividades
 
 - Todas as atividades realizadas no projeto devem ser registradas em `logs/atividades/`.
