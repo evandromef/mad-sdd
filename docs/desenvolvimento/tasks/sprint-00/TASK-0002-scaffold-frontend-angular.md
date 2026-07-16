@@ -73,5 +73,6 @@ O frontend deve ser uma aplicacao independente da API, conforme arquitetura do p
 - Validacao visual em viewport de 360px realizada pelo desenvolvedor, sem problemas na navegacao movel ou no shell inicial.
 - Textos visiveis e nomes acessiveis do shell inicial corrigidos para usar a acentuacao adequada em portugues.
 - Correcao responsiva aplicada na tabela de posicoes: a rolagem horizontal passou a ficar disponivel sempre que a largura da tabela exceder sua area, inclusive entre 760px e 1000px.
+- `rootDir` declarado explicitamente nos tsconfigs da aplicacao e dos testes para compatibilidade com o diagnostico e a migracao do TypeScript 6.
 - Observacao nao bloqueante: botoes sem acao e dados financeiros ficticios sao compativeis com o shell inicial, mas devem ser identificados, desabilitados ou substituidos quando as funcionalidades correspondentes forem implementadas.
 - A revisao tecnica nao altera o status da task, que permanece `Em revisao` ate aprovacao direta.

@@ -12,6 +12,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - Ajuste de revisao P2 aplicado na TASK-0002: teste base alinhado a Vitest com Angular Testing Library.
 - Achado P2 do README resolvido, validacao visual em 360px aprovada pelo desenvolvedor e textos visiveis corrigidos com acentuacao em portugues.
 - Corrigido o recorte da tabela de posicoes em larguras intermediarias com um contêiner de rolagem horizontal dedicado.
+- Configuracoes TypeScript da aplicacao e dos testes ajustadas com `rootDir` explicito para compatibilidade com TypeScript 6.
 
 ## Proximo passo imediato
 
@@ -50,5 +51,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-15 09:48 America/Sao_Paulo
+- Data/hora: 2026-07-15 12:16 America/Sao_Paulo
 - Responsavel: Codex
