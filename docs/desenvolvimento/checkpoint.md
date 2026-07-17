@@ -34,6 +34,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - A TASK-0001 esta aprovada e concluida.
 - A TASK-0002 esta em revisao.
 - Testes de componente do frontend devem usar Angular Testing Library sobre Vitest.
+- A TASK-0006 deve formalizar e aplicar a convencao: Tailwind para layout/espacamento/responsividade, PrimeNG para componentes e CSS local apenas para estilos especificos; o scaffold atual ainda concentra layout nos CSS dos componentes.
 
 ## Contexto importante
 
@@ -52,5 +53,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-17 10:52 America/Sao_Paulo
+- Data/hora: 2026-07-17 11:14 America/Sao_Paulo
 - Responsavel: Codex
