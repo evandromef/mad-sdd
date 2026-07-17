@@ -22,27 +22,30 @@
     </div>
 
     <div class="positions-table-scroll">
-      <div class="positions-table" role="table" aria-label="Posição por ativo">
-        <div class="positions-row positions-header" role="row">
-          <span role="columnheader">Ativo</span>
-          <span role="columnheader">Categoria</span>
-          <span role="columnheader">Quantidade</span>
-          <span role="columnheader">Custo total</span>
-          <span role="columnheader">Valor atual</span>
-          <span role="columnheader">Alocação</span>
-        </div>
-
-        @for (position of positions; track position.ticker) {
-          <div class="positions-row" role="row">
-            <strong role="cell">{{ position.ticker }}</strong>
-            <span role="cell"><p-tag [value]="position.category" severity="secondary" /></span>
-            <span role="cell">{{ position.quantity }}</span>
-            <span role="cell">{{ position.acquisitionCost | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}</span>
-            <span role="cell">{{ position.currentValue | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}</span>
-            <span role="cell">{{ position.allocation | percent: '1.1-1' : 'pt-BR' }}</span>
-          </div>
-        }
-      </div>
+      <table class="positions-table" aria-label="Posição por ativo">
+        <thead>
+          <tr>
+            <th scope="col">Ativo</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Custo total</th>
+            <th scope="col">Valor atual</th>
+            <th scope="col">Alocação</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (position of positions; track position.ticker) {
+            <tr>
+              <th scope="row">{{ position.ticker }}</th>
+              <td><p-tag [value]="position.category" severity="secondary" /></td>
+              <td>{{ position.quantity }}</td>
+              <td>{{ position.acquisitionCost | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}</td>
+              <td>{{ position.currentValue | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}</td>
+              <td>{{ position.allocation | percent: '1.1-1' : 'pt-BR' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
     </div>
   </section>
 </section>

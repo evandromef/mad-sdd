@@ -13,6 +13,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - Achado P2 do README resolvido, validacao visual em 360px aprovada pelo desenvolvedor e textos visiveis corrigidos com acentuacao em portugues.
 - Corrigido o recorte da tabela de posicoes em larguras intermediarias com um contêiner de rolagem horizontal dedicado.
 - Configuracoes TypeScript da aplicacao e dos testes ajustadas com `rootDir` explicito para compatibilidade com TypeScript 6.
+- Tabela de posicoes migrada para HTML tabular nativo com teste de semantica acessivel.
 
 ## Proximo passo imediato
 
@@ -51,5 +52,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-15 12:16 America/Sao_Paulo
+- Data/hora: 2026-07-17 10:52 America/Sao_Paulo
 - Responsavel: Codex

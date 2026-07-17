@@ -75,25 +75,28 @@ h2 {
 }
 
 .positions-table {
-  display: grid;
+  width: 100%;
   min-width: 42rem;
+  border-collapse: collapse;
 }
 
-.positions-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1.2fr 1.2fr 1fr;
-  align-items: center;
-  gap: 1rem;
+.positions-table th,
+.positions-table td {
   border-top: 1px solid #edf1f5;
   padding: 0.8rem 0;
+  text-align: left;
 }
 
-.positions-header {
+.positions-table thead th {
   border-top: 0;
   color: #64748b;
   font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
+}
+
+.positions-table tbody th {
+  font-weight: 700;
 }
 
 @media (max-width: 760px) {
