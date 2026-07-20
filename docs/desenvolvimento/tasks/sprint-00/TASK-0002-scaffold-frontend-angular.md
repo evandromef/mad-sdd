@@ -56,8 +56,8 @@ O frontend deve ser uma aplicacao independente da API, conforme arquitetura do p
 
 - [ ] Planejada
 - [ ] Em andamento
-- [x] Em revisao
-- [ ] Concluida
+- [ ] Em revisao
+- [x] Concluida
 
 ## Notas de implementacao
 
@@ -77,4 +77,5 @@ O frontend deve ser uma aplicacao independente da API, conforme arquitetura do p
 - Tabela de posicoes migrada de `div`s com papeis ARIA para elementos HTML tabulares nativos, preservando a rolagem horizontal responsiva e melhorando a semantica de acessibilidade.
 - Testes do shell movidos de `app.spec.ts` para `layout/app-shell/app-shell.spec.ts`, mantendo cada teste proximo do componente e o teste raiz focado na composicao da aplicacao.
 - Observacao nao bloqueante: botoes sem acao e dados financeiros ficticios sao compativeis com o shell inicial, mas devem ser identificados, desabilitados ou substituidos quando as funcionalidades correspondentes forem implementadas.
-- A revisao tecnica nao altera o status da task, que permanece `Em revisao` ate aprovacao direta.
+- Task aprovada diretamente pelo desenvolvedor e marcada como `Concluida` em 2026-07-20.
+- Na conclusao, a nova tentativa de executar testes e build neste shell foi bloqueada porque o Node.js disponivel via WSL informou que WSL 1 nao e suportado. Permanecem como evidencia final as execucoes bem-sucedidas registradas anteriormente em 2026-07-20 com Node.js 24.17.0: type checks, 4 testes em 3 arquivos e build Angular.

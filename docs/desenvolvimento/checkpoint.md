@@ -7,7 +7,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - Branch `codex/sprint-00-fundacao` criada.
 - Sprint 0 iniciada.
 - TASK-0001 concluida com build e teste automatizado aprovados no Java 25.
-- TASK-0002 implementada e colocada em revisao.
+- TASK-0002 aprovada diretamente pelo desenvolvedor e concluida.
 - Frontend Angular 21 criado em `codebase/frontend/` com PrimeNG, Tailwind CSS, shell inicial e testes base.
 - Ajuste de revisao P2 aplicado na TASK-0002: teste base alinhado a Vitest com Angular Testing Library.
 - Achado P2 do README resolvido, validacao visual em 360px aprovada pelo desenvolvedor e textos visiveis corrigidos com acentuacao em portugues.
@@ -18,11 +18,11 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Proximo passo imediato
 
-- Aguardar revisao/aprovacao direta da TASK-0002 antes de marca-la como concluida ou iniciar nova task.
+- Preparar o inicio da TASK-0003, mantendo-a como `Planejada` ate autorizacao explicita para implementacao.
 
 ## Bloqueios
 
-- TASK-0002 aguarda revisao/aprovacao direta do usuario para conclusao.
+- Nenhum bloqueio ativo.
 
 ## Decisoes recentes
 
@@ -33,7 +33,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - Spring Boot 3.5.x sera usado por oferecer suporte ao Java 25 sem migrar para Spring Boot 4.
 - O fluxo de revisao e aprovacao se aplica somente ao desenvolvimento das tasks das sprints.
 - A TASK-0001 esta aprovada e concluida.
-- A TASK-0002 esta em revisao.
+- A TASK-0002 foi aprovada diretamente e esta concluida.
 - Testes de componente do frontend devem usar Angular Testing Library sobre Vitest.
 - A TASK-0006 deve formalizar e aplicar a convencao: Tailwind para layout/espacamento/responsividade, PrimeNG para componentes e CSS local apenas para estilos especificos; o scaffold atual ainda concentra layout nos CSS dos componentes.
 
@@ -54,5 +54,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-20 18:59 America/Sao_Paulo
+- Data/hora: 2026-07-20 20:51 America/Sao_Paulo
 - Responsavel: Codex
