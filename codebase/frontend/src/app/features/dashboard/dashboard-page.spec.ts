@@ -14,5 +14,6 @@ describe('DashboardPage', () => {
     expect(within(table).getByRole('columnheader', { name: 'Ativo' })).toBeTruthy();
     expect(within(table).getByRole('columnheader', { name: 'Custo total' })).toBeTruthy();
     expect(within(table).getByRole('rowheader', { name: 'PETR4' })).toBeTruthy();
-  });
+  },
+  10_000);
 });

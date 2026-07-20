@@ -14,6 +14,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - Corrigido o recorte da tabela de posicoes em larguras intermediarias com um contêiner de rolagem horizontal dedicado.
 - Configuracoes TypeScript da aplicacao e dos testes ajustadas com `rootDir` explicito para compatibilidade com TypeScript 6.
 - Tabela de posicoes migrada para HTML tabular nativo com teste de semantica acessivel.
+- Testes do `AppShell` colocados junto ao componente; `app.spec.ts` permanece focado no componente raiz.
 
 ## Proximo passo imediato
 
@@ -53,5 +54,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-17 11:14 America/Sao_Paulo
+- Data/hora: 2026-07-20 18:59 America/Sao_Paulo
 - Responsavel: Codex
