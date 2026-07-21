@@ -9,7 +9,7 @@ Operações financeiras exigem transações ACID, integridade referencial, preci
 
 ## Decisão
 
-- PostgreSQL 18 hospedado no Aiven, com instância separada por ambiente.
+- PostgreSQL 17 hospedado no Aiven, com instância separada por ambiente. A versão 17 foi escolhida por sua estabilidade e maior compatibilidade com o Flyway adotado pelo projeto.
 - UUID como chave primária.
 - JPA/Hibernate para persistência e Flyway para evolução do schema.
 - `NUMERIC(19,8)` para dinheiro e quantidade; `NUMERIC(19,10)` para fatores e percentuais.
@@ -29,6 +29,7 @@ Operações financeiras exigem transações ACID, integridade referencial, preci
 
 ## Consequências
 
+- O ambiente local, os testes de integração, o CI e os ambientes hospedados devem usar PostgreSQL 17.
 - Escritas e alterações retroativas ficam mais complexas e exigem bloqueio/controle de versão.
 - A projeção deve ser reconstruível e testada contra o histórico.
 - Auditoria não pode conter senha, token, segredo ou dado pessoal desnecessário.

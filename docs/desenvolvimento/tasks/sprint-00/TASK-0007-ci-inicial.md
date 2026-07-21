@@ -21,7 +21,7 @@ O pipeline inicial deve garantir que a base tecnica em `codebase/` continue comp
 - Criar workflow GitHub Actions.
 - Executar build e testes do backend em `codebase/backend/`.
 - Executar build e testes do frontend em `codebase/frontend/`.
-- Validar migrations em PostgreSQL de CI ou Testcontainers.
+- Validar migrations em PostgreSQL 17 de CI ou Testcontainers.
 - Preparar etapa de validacao OpenAPI quando disponivel.
 
 ## Criterios de aceite

@@ -1,7 +1,7 @@
 # Documento de Arquitetura do Sistema — MAD — Meus Ativos Digitais
 
 > **Versão:** 1.0  
-> **Última atualização:** 07/07/2026  
+> **Última atualização:** 20/07/2026
 > **Responsável:** Evandro Moreira  
 > **Documento relacionado:** ERS — Especificação de Requisitos de Sistema
 
@@ -49,7 +49,7 @@ O frontend e a API são aplicações independentes. A API adota monolito modular
 flowchart LR
     U[Investidor] -->|HTTPS| FE[Angular 21\nContêiner no Render]
     FE -->|REST JSON /api/v1\nBearer JWT| API[Spring Boot 3 / Java 25\nContêiner no Render]
-    API -->|JDBC/TLS| DB[(PostgreSQL 18\nAiven)]
+    API -->|JDBC/TLS| DB[(PostgreSQL 17\nAiven)]
     API -->|HTTPS / OIDC| GOOGLE[Google Identity]
     API -->|HTTPS| BRAPI[Brapi]
     API -->|HTTPS| RESEND[Resend]
@@ -61,7 +61,7 @@ flowchart LR
 | --- | --- | --- |
 | Frontend | Interface responsiva, formulários e apresentação | Angular 21, TypeScript, PrimeNG, Tailwind CSS |
 | API | Autenticação, autorização, regras de negócio e integrações | Java 25, Spring Boot 3, Spring Security |
-| Persistência | Dados transacionais, posição materializada, auditoria e cotações | PostgreSQL 18 no Aiven, JPA/Hibernate, Flyway |
+| Persistência | Dados transacionais, posição materializada, auditoria e cotações | PostgreSQL 17 no Aiven, JPA/Hibernate, Flyway |
 | Jobs | Catálogo de ativos e cotações diárias | Spring Scheduler e trava no PostgreSQL |
 | Externos | Identidade, e-mail e dados da bolsa brasileira | Google OIDC, Resend e Brapi |
 
@@ -89,7 +89,7 @@ flowchart LR
 
 ### 3.3 Persistência
 
-- PostgreSQL 18, uma instância Aiven isolada para cada ambiente.
+- PostgreSQL 17, uma instância Aiven isolada para cada ambiente, priorizando estabilidade e compatibilidade com o Flyway adotado pelo projeto.
 - UUID para chaves primárias.
 - `NUMERIC(19,8)` para dinheiro e quantidade; `NUMERIC(19,10)` para fatores e percentuais.
 - Valores BRL são arredondados para duas casas apenas na resposta e exibição.

@@ -16,7 +16,7 @@ Todas as implementacoes devem seguir as specs em `docs/` antes de gerar codigo.
 
 - **Frontend:** Angular 21 LTS, Node.js 24 LTS e TypeScript.
 - **Backend:** Spring Boot 3 e Java 25 LTS.
-- **Banco de dados:** PostgreSQL 18.
+- **Banco de dados:** PostgreSQL 17.
 - **Dados de mercado:** Brapi.
 
 ### Estrutura de Pastas

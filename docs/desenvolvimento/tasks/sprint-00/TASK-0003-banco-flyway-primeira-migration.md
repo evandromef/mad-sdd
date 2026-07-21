@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Configurar PostgreSQL local e Flyway para permitir evolucao versionada do schema desde o inicio do projeto.
+Configurar PostgreSQL 17 local e Flyway para permitir evolucao versionada do schema desde o inicio do projeto.
 
 ## Contexto
 
@@ -18,7 +18,7 @@ O MAD depende de persistencia relacional, transacoes ACID, UUIDs, tipos numerico
 
 ## Escopo tecnico
 
-- Configurar conexao local da API com PostgreSQL.
+- Configurar conexao local da API com PostgreSQL 17.
 - Configurar Flyway no backend em `codebase/backend/`.
 - Criar primeira migration tecnica minima.
 - Definir convencao de migrations.
@@ -26,7 +26,7 @@ O MAD depende de persistencia relacional, transacoes ACID, UUIDs, tipos numerico
 
 ## Criterios de aceite
 
-- Banco local sobe em ambiente de desenvolvimento.
+- PostgreSQL 17 local sobe em ambiente de desenvolvimento.
 - Flyway executa as migrations do zero sem erro.
 - API conecta no banco local usando variaveis de ambiente ou perfil local.
 - Migration inicial nao implementa regra funcional fora do escopo da Sprint 0.
@@ -40,7 +40,7 @@ O MAD depende de persistencia relacional, transacoes ACID, UUIDs, tipos numerico
 
 ## Testes previstos
 
-- Teste de integracao simples validando contexto com PostgreSQL via Testcontainers.
+- Teste de integracao simples validando contexto com PostgreSQL 17 via Testcontainers.
 - Execucao local de migrations em banco limpo.
 
 ## Dependencias

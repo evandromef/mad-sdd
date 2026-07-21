@@ -17,7 +17,7 @@ Preparar a base tecnica do projeto para desenvolvimento seguro e repetivel.
 
 - Estrutura backend em `codebase/backend/`.
 - Estrutura frontend em `codebase/frontend/`.
-- Banco e Flyway.
+- PostgreSQL 17 e Flyway.
 - Docker local.
 - CI inicial.
 - Padroes de testes e OpenAPI.

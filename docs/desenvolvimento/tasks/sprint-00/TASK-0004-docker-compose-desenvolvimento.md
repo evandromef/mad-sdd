@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Padronizar o ambiente local de desenvolvimento com Docker Compose para backend, frontend e PostgreSQL.
+Padronizar o ambiente local de desenvolvimento com Docker Compose para backend, frontend e PostgreSQL 17.
 
 ## Contexto
 
@@ -27,7 +27,7 @@ A Sprint 0 precisa reduzir variacao de ambiente e permitir que o projeto seja ex
 ## Criterios de aceite
 
 - `docker compose up` sobe a stack local planejada.
-- Backend, frontend e PostgreSQL ficam acessiveis nas portas documentadas.
+- Backend, frontend e PostgreSQL 17 ficam acessiveis nas portas documentadas.
 - Nao ha segredos reais versionados.
 - O ambiente local permite executar migrations no banco.
 - Arquivos operacionais da aplicacao ficam dentro de `codebase/`.

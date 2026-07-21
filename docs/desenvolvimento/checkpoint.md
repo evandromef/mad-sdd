@@ -4,6 +4,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Onde paramos
 
+- A implementacao anterior da TASK-0003 baseada em PostgreSQL 18 foi preservada em stash antes da mudanca de versao; a documentacao agora define PostgreSQL 17.
 - Branch `codex/sprint-00-fundacao` criada.
 - Sprint 0 iniciada.
 - TASK-0001 concluida com build e teste automatizado aprovados no Java 25.
@@ -18,7 +19,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Proximo passo imediato
 
-- Preparar o inicio da TASK-0003, mantendo-a como `Planejada` ate autorizacao explicita para implementacao.
+- Preparar o inicio da TASK-0003 com PostgreSQL 17, mantendo-a como `Planejada` ate autorizacao explicita para implementacao.
 
 ## Bloqueios
 
@@ -26,6 +27,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Decisoes recentes
 
+- PostgreSQL 17 substitui o PostgreSQL 18 na stack oficial por oferecer maior estabilidade e compatibilidade com o Flyway adotado pelo projeto.
 - O arquivo de memoria volatil se chama `checkpoint.md`.
 - Tasks da Sprint 0 foram criadas apos aprovacao explicita do usuario.
 - Todo codigo da aplicacao deve ficar dentro de `codebase/`; documentacao e logs permanecem em `docs/` e `logs/`.
@@ -54,5 +56,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-20 20:51 America/Sao_Paulo
+- Data/hora: 2026-07-20 22:38 America/Sao_Paulo
 - Responsavel: Codex

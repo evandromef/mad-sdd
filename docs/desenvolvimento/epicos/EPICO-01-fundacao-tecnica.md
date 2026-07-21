@@ -13,7 +13,7 @@ Preparar a base tecnica para desenvolvimento, testes, integracao continua e evol
 
 - Estrutura backend Spring Boot.
 - Estrutura frontend Angular.
-- Banco PostgreSQL e Flyway.
+- Banco PostgreSQL 17 e Flyway.
 - Docker local.
 - CI inicial.
 - Padroes de modulos, testes e OpenAPI.
