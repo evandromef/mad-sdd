@@ -213,7 +213,7 @@ Todas as decisões arquiteturais significativas — com contexto, alternativas a
 | ADR | Título |
 | --- | --- |
 | [001](./adr/adr-001-estilo-arquitetural.md) | Estilo Arquitetural do Sistema (Monolito Modular) |
-| [002](./adr/adr-002-banco-de-dados.md) | Escolha do Banco de Dados (PostgreSQL / Neon) |
+| [002](./adr/adr-002-banco-de-dados.md) | Banco de Dados e Persistência (PostgreSQL 17 / Aiven) |
 | [003](./adr/adr-003-provedor-oauth.md) | Login Social (Spring Security OAuth2 Client + Google) |
 | [004](./adr/adr-004-provedor-cotacoes.md) | Provedor de Dados da Bolsa de Valores do Brasil (Brapi.dev, plano gratuito) |
 | [005](./adr/adr-005-estrategia-autenticacao.md) | Autenticação (JWT + Argon2) |

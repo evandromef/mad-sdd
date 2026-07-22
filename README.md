@@ -62,3 +62,22 @@ Algumas regras centrais do domínio:
 - `logs/atividades/`: registros diários das atividades realizadas no projeto.
 - `AGENTS.md`: instruções de trabalho para agentes de IA neste repositório.
 - `Agent`: arquivo atualmente vazio, mantido no repositório.
+
+## Banco de dados local
+
+O PostgreSQL 17 local é executado por Docker Compose. O arquivo `codebase/.env.example` concentra os valores de referência; o arquivo local `codebase/.env` é ignorado pelo Git.
+
+1. Copie `codebase/.env.example` para `codebase/.env`.
+2. Preencha `MAD_DB_PASSWORD` em `codebase/.env`.
+3. Execute `docker compose up -d postgres` dentro de `codebase/`.
+4. Aguarde o health check com `docker compose ps`.
+
+Para executar o backend fora do Docker, execute `mvn spring-boot:run` em `codebase/backend/`. O Spring Boot importa automaticamente `codebase/.env`; variáveis de ambiente do processo continuam tendo precedência. `MAD_DB_HOST`, `MAD_DB_PORT`, `MAD_DB_NAME`, `MAD_DB_USERNAME` e `MAD_DB_PASSWORD` são obrigatórias, e a aplicação monta a URL JDBC sem fornecer valores silenciosos de fallback.
+
+### Convenção de migrations
+
+- Migrations ficam em `codebase/backend/src/main/resources/db/migration/`.
+- O nome segue `V<versão>__<descrição_em_snake_case>.sql`, por exemplo `V1__initialize_mad_db_schema.sql`.
+- Uma migration aplicada não deve ser editada; correções são feitas em uma nova versão.
+- O Flyway cria e gerencia o schema `mad_db`; migrations e histórico são executados nesse mesmo schema.
+- O Flyway é o único mecanismo permitido para alterar schemas compartilhados.
