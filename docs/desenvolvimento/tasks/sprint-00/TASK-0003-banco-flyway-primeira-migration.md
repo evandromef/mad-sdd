@@ -52,8 +52,8 @@ O MAD depende de persistencia relacional, transacoes ACID, UUIDs, tipos numerico
 
 - [ ] Planejada
 - [ ] Em andamento
-- [x] Em revisao
-- [ ] Concluida
+- [ ] Em revisao
+- [x] Concluida
 
 ## Notas de implementacao
 
@@ -76,7 +76,7 @@ O MAD depende de persistencia relacional, transacoes ACID, UUIDs, tipos numerico
 - Data: 2026-07-21
 - Revisor: Codex
 - Escopo revisado: documentacao vigente, criterios de aceite, configuracao Spring, Docker Compose, Flyway, migration V1 e testes com PostgreSQL 17.
-- Status da task: mantido como `Em revisao`, aguardando aprovacao direta do desenvolvedor.
+- Status da task: `Concluida` após aprovacao direta do desenvolvedor em 2026-07-23.
 
 ### Resultado
 
@@ -107,5 +107,21 @@ O MAD depende de persistencia relacional, transacoes ACID, UUIDs, tipos numerico
 - Validacao local concluida: banco recriado, duas inicializacoes consecutivas aprovadas e catalogo confirmado com historico somente em `mad_db`.
 - Revalidacao tecnica: em 2026-07-21, a revisao confirmou o schema ativo `mad_db`, o historico em `mad_db.flyway_schema_history`, a ausencia do historico em `public` e zero migrations aplicadas na segunda execucao.
 - Testes da revalidacao: `mvn test` executou 2 testes com sucesso; uma execucao adicional de `mvn clean test` foi impedida por restricoes do ambiente isolado ao Docker e ao mecanismo de anexacao do Mockito, sem indicar defeito da implementacao.
-- Status do achado: corrigido e aprovado na revisao tecnica; nenhum item de revisao permanece aberto.
-- Status da task: mantido como `Em revisao`, aguardando aprovacao direta do desenvolvedor.
+- Status do achado: corrigido e aprovado na revisao tecnica.
+- Status da task: `Concluida` após aprovacao direta do desenvolvedor em 2026-07-23.
+
+### Item de revisao corrigido
+
+#### [P2] Exercitar a configuracao real da conexao por variaveis de ambiente
+
+- Evidencia original: `DatabaseMigrationIntegrationTest` usava `@ServiceConnection`, que fornecia diretamente ao Spring os detalhes JDBC do Testcontainers e substituia a configuracao declarada em `application.yml`.
+- Impacto: o teste comprova a integracao com PostgreSQL, Flyway e Hibernate, mas nao valida automaticamente a montagem da URL `jdbc:postgresql://${MAD_DB_HOST}:${MAD_DB_PORT}/${MAD_DB_NAME}` nem o uso de `MAD_DB_USERNAME` e `MAD_DB_PASSWORD`. O criterio de aceite sobre conexao por variaveis permanece sustentado apenas por validacao manual.
+- Correcao recomendada: remover ou complementar `@ServiceConnection` e registrar via `@DynamicPropertySource` as propriedades `MAD_DB_HOST`, `MAD_DB_PORT`, `MAD_DB_NAME`, `MAD_DB_USERNAME` e `MAD_DB_PASSWORD` obtidas do `PostgreSQLContainer`, permitindo que o teste atravesse a mesma composicao definida em `application.yml`.
+- Validacao esperada: iniciar o contexto com as cinco propriedades externas, confirmar a URL efetiva do `DataSource`, aplicar a V1 em banco limpo e preservar as verificacoes existentes de schema, historico e segunda execucao sem migration pendente.
+- Organizacao recomendada: separar, se isso melhorar o diagnostico, as verificacoes de configuracao, aplicacao inicial e idempotencia em metodos de teste distintos, sem iniciar containers adicionais desnecessarios.
+- Correcao aplicada: `@ServiceConnection` foi substituido por `@DynamicPropertySource`, que publica host, porta, banco, usuario e senha do mesmo `PostgreSQLContainer` nas propriedades `MAD_DB_*` consumidas pelo `application.yml`.
+- Validacao adicionada: o teste confirma a URL JDBC efetiva e o usuario autenticado, preservando as verificacoes de migration, schemas, historico e segunda execucao.
+- Dependencia removida: `spring-boot-testcontainers`, usada apenas por `@ServiceConnection`; as dependencias `org.testcontainers:junit-jupiter` e `org.testcontainers:postgresql` foram mantidas.
+- Validacao concluida: `mvn test` executou 2 testes com sucesso, e `mvn spring-boot:run` confirmou a inicializacao local com a V1 ja aplicada em `mad_db`.
+- Legibilidade dos testes: os testes de integracao e MVC usam valores observados em variaveis imediatamente acima dos asserts e descricoes comportamentais em `as()`; a integracao preserva cenarios pequenos e helpers JDBC focados.
+- Status do achado: corrigido e aprovado; a TASK-0003 foi concluida após aprovacao direta do desenvolvedor em 2026-07-23.

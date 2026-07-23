@@ -28,7 +28,7 @@ Preparar a base tecnica do projeto para desenvolvimento seguro e repetivel.
 | --- | --- | --- | --- |
 | [TASK-0001](../tasks/sprint-00/TASK-0001-scaffold-backend-spring-boot.md) | Scaffold do backend Spring Boot. | Concluida | Codex |
 | [TASK-0002](../tasks/sprint-00/TASK-0002-scaffold-frontend-angular.md) | Scaffold do frontend Angular. | Concluida | Codex |
-| [TASK-0003](../tasks/sprint-00/TASK-0003-banco-flyway-primeira-migration.md) | Banco local, Flyway e primeira migration. | Em revisao | Codex |
+| [TASK-0003](../tasks/sprint-00/TASK-0003-banco-flyway-primeira-migration.md) | Banco local, Flyway e primeira migration. | Concluida | Codex |
 | [TASK-0004](../tasks/sprint-00/TASK-0004-docker-compose-desenvolvimento.md) | Docker Compose de desenvolvimento. | Planejada | |
 | [TASK-0005](../tasks/sprint-00/TASK-0005-openapi-contrato-inicial-api.md) | OpenAPI e contrato inicial da API. | Planejada | |
 | [TASK-0006](../tasks/sprint-00/TASK-0006-padroes-testes-cobertura.md) | Padroes de testes e cobertura. | Planejada | |

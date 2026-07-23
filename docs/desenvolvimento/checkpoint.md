@@ -5,7 +5,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 ## Onde paramos
 
 - A implementacao anterior da TASK-0003 baseada em PostgreSQL 18 foi descartada conforme orientacao do desenvolvedor.
-- TASK-0003 reimplementada com PostgreSQL 17 e colocada em revisao.
+- TASK-0003 reimplementada com PostgreSQL 17, aprovada diretamente pelo desenvolvedor e concluida.
 - PostgreSQL 17 local validado via Docker Compose e Testcontainers; migration V1 aplicada do zero sem erro.
 - Banco local, schema da aplicacao e schema de historico do Flyway alinhados em `mad_db`.
 - Branch `codex/sprint-00-fundacao` criada.
@@ -22,7 +22,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Proximo passo imediato
 
-- Aguardar revisao e aprovacao direta da TASK-0003.
+- Aguardar autorizacao para iniciar a TASK-0004.
 
 ## Bloqueios
 
@@ -39,12 +39,14 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - O fluxo de revisao e aprovacao se aplica somente ao desenvolvimento das tasks das sprints.
 - A TASK-0001 esta aprovada e concluida.
 - A TASK-0002 foi aprovada diretamente e esta concluida.
-- A TASK-0003 esta em revisao e nao deve ser concluida sem aprovacao direta.
+- A TASK-0003 foi aprovada diretamente e esta concluida.
 - Migrations seguem `V<versao>__<descricao_em_snake_case>.sql` e nao podem ser editadas depois de aplicadas.
 - Configuracoes de conexao do banco nao possuem valores de fallback no runtime; o banco e o schema `mad_db` permanecem uma decisao estrutural fixa.
 - A URL JDBC e composta por `MAD_DB_HOST`, `MAD_DB_PORT` e `MAD_DB_NAME`, evitando duplicacao da porta em uma URL completa.
 - O Spring Boot importa automaticamente `codebase/.env` no desenvolvimento local.
 - Flyway e Hibernate usam `mad_db` como schema padrao; o Flyway cria o schema e mantem nele o historico de migrations.
+- O teste de integracao publica os valores reais do Testcontainers como propriedades `MAD_DB_*`, exercitando a composicao da conexao definida em `application.yml`.
+- Testes backend devem preferir cenarios pequenos, variaveis descritivas imediatamente acima do assert correspondente, helpers focados e descricoes concisas em `as()`.
 - Testes de componente do frontend devem usar Angular Testing Library sobre Vitest.
 - A TASK-0006 deve formalizar e aplicar a convencao: Tailwind para layout/espacamento/responsividade, PrimeNG para componentes e CSS local apenas para estilos especificos; o scaffold atual ainda concentra layout nos CSS dos componentes.
 
@@ -67,5 +69,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-21 21:11 America/Sao_Paulo
+- Data/hora: 2026-07-23 10:08 America/Sao_Paulo
 - Responsavel: Codex
