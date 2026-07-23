@@ -49,7 +49,7 @@ O frontend e a API são aplicações independentes. A API adota monolito modular
 flowchart LR
     U[Investidor] -->|HTTPS| FE[Angular 21\nContêiner no Render]
     FE -->|REST JSON /api/v1\nBearer JWT| API[Spring Boot 3 / Java 25\nContêiner no Render]
-    API -->|JDBC/TLS| DB[(PostgreSQL 17\nAiven)]
+    API -->|JDBC/TLS| DB[(PostgreSQL 17\nLocal ou Aiven)]
     API -->|HTTPS / OIDC| GOOGLE[Google Identity]
     API -->|HTTPS| BRAPI[Brapi]
     API -->|HTTPS| RESEND[Resend]
@@ -61,7 +61,7 @@ flowchart LR
 | --- | --- | --- |
 | Frontend | Interface responsiva, formulários e apresentação | Angular 21, TypeScript, PrimeNG, Tailwind CSS |
 | API | Autenticação, autorização, regras de negócio e integrações | Java 25, Spring Boot 3, Spring Security |
-| Persistência | Dados transacionais, posição materializada, auditoria e cotações | PostgreSQL 17 no Aiven, JPA/Hibernate, Flyway |
+| Persistência | Dados transacionais, posição materializada, auditoria e cotações | PostgreSQL 17 local no desenvolvimento e no Aiven em homologação/produção, JPA/Hibernate, Flyway |
 | Jobs | Catálogo de ativos e cotações diárias | Spring Scheduler e trava no PostgreSQL |
 | Externos | Identidade, e-mail e dados da bolsa brasileira | Google OIDC, Resend e Brapi |
 
@@ -89,7 +89,7 @@ flowchart LR
 
 ### 3.3 Persistência
 
-- PostgreSQL 17, uma instância Aiven isolada para cada ambiente, priorizando estabilidade e compatibilidade com o Flyway adotado pelo projeto.
+- PostgreSQL 17, executado localmente por Docker Compose no desenvolvimento e em instâncias Aiven isoladas para homologação e produção, priorizando estabilidade e compatibilidade com o Flyway adotado pelo projeto.
 - UUID para chaves primárias.
 - `NUMERIC(19,8)` para dinheiro e quantidade; `NUMERIC(19,10)` para fatores e percentuais.
 - Valores BRL são arredondados para duas casas apenas na resposta e exibição.
@@ -164,7 +164,7 @@ O backend usa Spring Security OAuth2 Client. Somente contas com e-mail verificad
 
 | Ambiente | Frontend | Backend | Banco |
 | --- | --- | --- | --- |
-| Desenvolvimento | Contêiner Docker/local | Contêiner Docker/local | Aiven dedicado |
+| Desenvolvimento | Contêiner Docker/local | Contêiner Docker/local | PostgreSQL 17 local via Docker Compose |
 | Homologação | Contêiner no Render | Contêiner separado no Render | Aiven dedicado |
 | Produção | Contêiner no Render | Contêiner separado no Render | Aiven dedicado |
 
@@ -213,7 +213,7 @@ Todas as decisões arquiteturais significativas — com contexto, alternativas a
 | ADR | Título |
 | --- | --- |
 | [001](./adr/adr-001-estilo-arquitetural.md) | Estilo Arquitetural do Sistema (Monolito Modular) |
-| [002](./adr/adr-002-banco-de-dados.md) | Banco de Dados e Persistência (PostgreSQL 17 / Aiven) |
+| [002](./adr/adr-002-banco-de-dados.md) | Banco de Dados e Persistência (PostgreSQL 17 local / Aiven) |
 | [003](./adr/adr-003-provedor-oauth.md) | Login Social (Spring Security OAuth2 Client + Google) |
 | [004](./adr/adr-004-provedor-cotacoes.md) | Provedor de Dados da Bolsa de Valores do Brasil (Brapi.dev, plano gratuito) |
 | [005](./adr/adr-005-estrategia-autenticacao.md) | Autenticação (JWT + Argon2) |

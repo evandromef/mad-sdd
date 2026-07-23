@@ -31,6 +31,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 ## Decisoes recentes
 
 - PostgreSQL 17 substitui o PostgreSQL 18 na stack oficial por oferecer maior estabilidade e compatibilidade com o Flyway adotado pelo projeto.
+- Desenvolvimento usa PostgreSQL 17 local via Docker Compose; homologacao e producao usam instancias Aiven dedicadas e separadas.
 - O arquivo de memoria volatil se chama `checkpoint.md`.
 - Tasks da Sprint 0 foram criadas apos aprovacao explicita do usuario.
 - Todo codigo da aplicacao deve ficar dentro de `codebase/`; documentacao e logs permanecem em `docs/` e `logs/`.
