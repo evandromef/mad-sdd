@@ -6,6 +6,9 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 - A implementacao anterior da TASK-0003 baseada em PostgreSQL 18 foi descartada conforme orientacao do desenvolvedor.
 - TASK-0003 reimplementada com PostgreSQL 17, aprovada diretamente pelo desenvolvedor e concluida.
+- TASK-0004 aprovada diretamente pelo desenvolvedor e concluida.
+- Frontend e backend executam nativamente no desenvolvimento; seus Dockerfiles sao exclusivos para homologacao e producao.
+- Ajuste da TASK-0004 revalidado com PostgreSQL saudavel, 4 testes backend, 4 testes frontend e build das duas imagens de entrega.
 - PostgreSQL 17 local validado via Docker Compose e Testcontainers; migration V1 aplicada do zero sem erro.
 - Banco local, schema da aplicacao e schema de historico do Flyway alinhados em `mad_db`.
 - Branch `codex/sprint-00-fundacao` criada.
@@ -22,7 +25,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Proximo passo imediato
 
-- Aguardar autorizacao para iniciar a TASK-0004.
+- Iniciar o planejamento da TASK-0005, sem iniciar implementacao antes da autorizacao explicita do desenvolvedor.
 
 ## Bloqueios
 
@@ -32,6 +35,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 - PostgreSQL 17 substitui o PostgreSQL 18 na stack oficial por oferecer maior estabilidade e compatibilidade com o Flyway adotado pelo projeto.
 - Desenvolvimento usa PostgreSQL 17 local via Docker Compose; homologacao e producao usam instancias Aiven dedicadas e separadas.
+- Docker para frontend e backend e usado somente nos artefatos de homologacao e producao.
 - O arquivo de memoria volatil se chama `checkpoint.md`.
 - Tasks da Sprint 0 foram criadas apos aprovacao explicita do usuario.
 - Todo codigo da aplicacao deve ficar dentro de `codebase/`; documentacao e logs permanecem em `docs/` e `logs/`.
@@ -41,6 +45,9 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - A TASK-0001 esta aprovada e concluida.
 - A TASK-0002 foi aprovada diretamente e esta concluida.
 - A TASK-0003 foi aprovada diretamente e esta concluida.
+- A TASK-0004 foi aprovada diretamente e esta concluida.
+- O frontend executa com Angular CLI e Node.js 24 no desenvolvimento; sua imagem de entrega usa Nginx.
+- O backend executa com Maven e Java 25 no desenvolvimento; sua imagem de entrega usa JRE Java 25.
 - Migrations seguem `V<versao>__<descricao_em_snake_case>.sql` e nao podem ser editadas depois de aplicadas.
 - Configuracoes de conexao do banco nao possuem valores de fallback no runtime; o banco e o schema `mad_db` permanecem uma decisao estrutural fixa.
 - A URL JDBC e composta por `MAD_DB_HOST`, `MAD_DB_PORT` e `MAD_DB_NAME`, evitando duplicacao da porta em uma URL completa.
@@ -70,5 +77,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-23 10:08 America/Sao_Paulo
+- Data/hora: 2026-07-24 17:30 America/Sao_Paulo
 - Responsavel: Codex

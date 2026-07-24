@@ -1,6 +1,7 @@
 services:
   postgres:
     image: postgres:17-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_DB: ${MAD_DB_NAME:?Defina MAD_DB_NAME no ambiente}
       POSTGRES_USER: ${MAD_DB_USERNAME:?Defina MAD_DB_USERNAME no ambiente}

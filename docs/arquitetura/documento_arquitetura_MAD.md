@@ -164,11 +164,12 @@ O backend usa Spring Security OAuth2 Client. Somente contas com e-mail verificad
 
 | Ambiente | Frontend | Backend | Banco |
 | --- | --- | --- | --- |
-| Desenvolvimento | Contêiner Docker/local | Contêiner Docker/local | PostgreSQL 17 local via Docker Compose |
+| Desenvolvimento | Node.js 24 / Angular CLI local | Java 25 / Maven local | PostgreSQL 17 local via Docker Compose |
 | Homologação | Contêiner no Render | Contêiner separado no Render | Aiven dedicado |
 | Produção | Contêiner no Render | Contêiner separado no Render | Aiven dedicado |
 
 URLs são fornecidas por variáveis de ambiente e não constam como valores fixos no repositório.
+Os contêineres de frontend e backend são artefatos exclusivos de homologação e produção; não integram o ambiente local de desenvolvimento.
 
 ### 7.2 CI/CD
 

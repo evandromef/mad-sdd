@@ -51,7 +51,8 @@ Todas as implementacoes devem seguir as specs em `docs/` antes de gerar codigo.
 - O agente executa comandos no Ubuntu sobre WSL 2.
 - Os comandos do projeto devem usar ferramentas Linux instaladas dentro do WSL, nunca executáveis herdados do Windows por meio de caminhos em `/mnt/c/`.
 - O Node.js Linux é gerenciado pelo `nvm`. Antes de executar comandos de frontend, o agente deve carregar o `nvm` e selecionar a versão 24 LTS.
-- Execucao local integrada: `docker-compose up`, quando o compose de desenvolvimento estiver configurado.
+- Banco local: executar o PostgreSQL 17 em `codebase/` com `docker compose up -d postgres`.
+- Frontend e backend devem executar nativamente no desenvolvimento; seus contêineres Docker destinam-se somente a homologacao e producao.
 - Testes frontend: executar em `codebase/frontend/` com `npm test`.
 - Testes backend: executar em `codebase/backend/` com `mvn test`.
 - Se o comando padrao ainda nao estiver disponivel ou falhar por configuracao pendente, registrar claramente o motivo no final da atividade.

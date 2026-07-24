@@ -63,16 +63,61 @@ Algumas regras centrais do domínio:
 - `AGENTS.md`: instruções de trabalho para agentes de IA neste repositório.
 - `Agent`: arquivo atualmente vazio, mantido no repositório.
 
-## Banco de dados local
+## Ambiente local de desenvolvimento
 
-O PostgreSQL 17 local é executado por Docker Compose. O arquivo `codebase/.env.example` concentra os valores de referência; o arquivo local `codebase/.env` é ignorado pelo Git.
+Frontend e backend são executados nativamente no desenvolvimento. O Docker Compose local mantém somente o PostgreSQL 17. Os Dockerfiles das aplicações são destinados aos artefatos de homologação e produção.
+
+O arquivo `codebase/.env.example` concentra os valores de referência para o banco; o arquivo local `codebase/.env` é ignorado pelo Git e deve conter apenas configurações do ambiente do desenvolvedor.
 
 1. Copie `codebase/.env.example` para `codebase/.env`.
 2. Preencha `MAD_DB_PASSWORD` em `codebase/.env`.
 3. Execute `docker compose up -d postgres` dentro de `codebase/`.
-4. Aguarde o health check com `docker compose ps`.
+4. Aguarde o PostgreSQL ficar saudável com `docker compose ps`.
 
-Para executar o backend fora do Docker, execute `mvn spring-boot:run` em `codebase/backend/`. O Spring Boot importa automaticamente `codebase/.env`; variáveis de ambiente do processo continuam tendo precedência. `MAD_DB_HOST`, `MAD_DB_PORT`, `MAD_DB_NAME`, `MAD_DB_USERNAME` e `MAD_DB_PASSWORD` são obrigatórias, e a aplicação monta a URL JDBC sem fornecer valores silenciosos de fallback.
+Serviços locais e portas padrão:
+
+| Serviço | Endereço local | Configuração da porta |
+| --- | --- | --- |
+| Frontend | `http://localhost:4200` | Angular CLI (`--port`) |
+| Backend | `http://localhost:8080` | Spring Boot (`SERVER_PORT`) |
+| PostgreSQL | `localhost:5432` | `MAD_DB_PORT` |
+
+Com o PostgreSQL saudável, execute o backend em `codebase/backend/`:
+
+```bash
+mvn spring-boot:run
+```
+
+O Spring Boot importa automaticamente `codebase/.env`; variáveis de ambiente do processo continuam tendo precedência. `MAD_DB_HOST`, `MAD_DB_PORT`, `MAD_DB_NAME`, `MAD_DB_USERNAME` e `MAD_DB_PASSWORD` são obrigatórias. A porta pode ser alterada com `SERVER_PORT=<porta> mvn spring-boot:run`. O endpoint técnico padrão fica em `http://localhost:8080/api/v1/system/status`.
+
+Antes de executar o frontend, carregue o `nvm`, selecione o Node.js 24 LTS e, em `codebase/frontend/`, execute:
+
+```bash
+nvm use 24
+npm start
+```
+
+O Angular CLI mantém o hot reload local. A porta pode ser alterada com `npm start -- --port <porta>`.
+
+Comandos do banco, executados dentro de `codebase/`:
+
+```bash
+docker compose ps
+docker compose logs -f postgres
+docker compose stop postgres
+docker compose down
+```
+
+### Contêineres de homologação e produção
+
+Frontend e backend possuem imagens e ciclos de deploy independentes. Esses Dockerfiles não compõem o ambiente local de desenvolvimento. Os comandos abaixo são executados dentro de `codebase/`:
+
+```bash
+docker build -t mad-backend:delivery ./backend
+docker build -t mad-frontend:delivery ./frontend
+```
+
+O frontend é compilado com Node.js 24 e servido pelo Nginx na porta interna 80. O backend é empacotado com Java 25 e expõe a porta interna 8080. As portas públicas são responsabilidade da plataforma de hospedagem.
 
 ### Convenção de migrations
 

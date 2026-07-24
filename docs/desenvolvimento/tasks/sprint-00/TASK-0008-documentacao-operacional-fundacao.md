@@ -19,7 +19,7 @@ A documentacao operacional reduz atrito para evoluir o MVP e serve como contrato
 ## Escopo tecnico
 
 - Atualizar README principal com visao de execucao local.
-- Documentar comandos de backend, frontend, banco, Docker e testes.
+- Documentar execucao nativa de backend e frontend, PostgreSQL local via Docker Compose, conteineres de entrega e testes.
 - Documentar variaveis de ambiente esperadas usando exemplos sem segredos.
 - Documentar a convencao de que todo codigo da aplicacao fica em `codebase/`.
 - Registrar convencoes iniciais de estrutura e fluxo de desenvolvimento.
@@ -27,7 +27,7 @@ A documentacao operacional reduz atrito para evoluir o MVP e serve como contrato
 
 ## Criterios de aceite
 
-- Um desenvolvedor consegue subir a stack local seguindo a documentacao.
+- Um desenvolvedor consegue subir o PostgreSQL e executar frontend e backend nativamente seguindo a documentacao.
 - Comandos de build, teste e migrations estao documentados.
 - Variaveis de ambiente sao descritas sem valores sensiveis.
 - Documentacao referencia corretamente a estrutura `docs/desenvolvimento/`.
