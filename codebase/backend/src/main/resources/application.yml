@@ -25,3 +25,11 @@ management:
     web:
       exposure:
         include: health,info
+
+springdoc:
+  api-docs:
+    enabled: false
+    version: openapi_3_0
+  paths-to-match: /api/v1/**
+  swagger-ui:
+    enabled: false

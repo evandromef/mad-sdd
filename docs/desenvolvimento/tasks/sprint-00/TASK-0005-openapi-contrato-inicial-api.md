@@ -33,10 +33,12 @@ O projeto exige API REST JSON documentada por OpenAPI. A fundacao deve criar o m
 
 ## Arquivos previstos
 
+- `codebase/backend/pom.xml`
 - `codebase/backend/src/main/`
+- `codebase/backend/src/test/`
 - `codebase/backend/src/main/resources/application*.yml`
-- `docs/`
-- `.github/workflows/`
+- `docs/api/openapi.yaml`
+- `README.md`
 
 ## Testes previstos
 
@@ -49,11 +51,35 @@ O projeto exige API REST JSON documentada por OpenAPI. A fundacao deve criar o m
 
 ## Status
 
-- [x] Planejada
+- [ ] Planejada
 - [ ] Em andamento
-- [ ] Em revisao
+- [x] Em revisao
 - [ ] Concluida
 
 ## Notas de implementacao
 
 - Evitar documentar endpoints de negocio antes das ESPECs funcionais aprovadas.
+- Swagger UI e o documento OpenAPI dinamico devem ficar expostos somente no perfil `development`.
+- A validacao efetiva do contrato no pipeline pertence a TASK-0007; esta task prepara testes executaveis pelo Maven.
+- Springdoc OpenAPI `2.8.17` configurado por ser a linha compativel com Spring Boot 3.5.
+- OpenAPI e Swagger UI ficam desabilitados em `application.yml` e sao habilitados explicitamente apenas em `application-development.yml`.
+- O contrato versionado inicial esta em `docs/api/openapi.yaml` e documenta somente `GET /api/v1/system/status`.
+- A resposta tecnica passou a usar o record `SystemStatusResponse`, evitando schema generico no contrato.
+- A validacao identificou que o endpoint nao declarava o tipo produzido; `application/json` foi explicitado para alinhar implementacao, documento dinamico e contrato versionado.
+- Testes automatizados comprovam que o perfil `development` expoe OpenAPI e Swagger UI e que perfis nao-development exigem autenticacao para essas rotas, mesmo quando a documentacao esta desabilitada.
+- A revisao da correcao do achado P2 identificou e corrigiu uma expectativa obsoleta de HTTP 404 no teste do perfil padrao; a protecao retorna HTTP 401 antes da resolucao do recurso.
+- Validacao final apos o alinhamento do teste e da documentacao: `mvn test` executou 7 testes com sucesso, sem falhas, erros ou testes ignorados.
+
+## Itens de revisao
+
+### [P2] Restringir a autorizacao da documentacao ao perfil development
+
+- Evidencia: `SecurityConfig` autoriza incondicionalmente `/v3/api-docs/**`, `/swagger-ui.html` e `/swagger-ui/**`, independentemente do perfil Spring ativo.
+- Impacto: embora OpenAPI e Swagger UI estejam desabilitados por padrao, uma sobrescrita externa de `springdoc.api-docs.enabled` ou `springdoc.swagger-ui.enabled` em homologacao ou producao tornaria a documentacao publicamente acessivel sem autenticacao.
+- Divergencia: o comportamento contradiz a decisao da TASK-0005 de expor a documentacao dinamica somente no perfil `development`.
+- Correcao esperada: condicionar as permissoes publicas das rotas de documentacao ao perfil `development`, mantendo as rotas tecnicas publicas independentes dessa condicao.
+- Teste de regressao esperado: comprovar que uma configuracao nao-development com Springdoc habilitado externamente nao torna as rotas de documentacao publicas, preservando o acesso no perfil `development`.
+- Correcao aplicada: o `SecurityConfig` libera publicamente as rotas de documentacao somente quando o perfil `development` esta ativo. Em qualquer outro perfil, as rotas exigem autenticacao, independentemente de o Springdoc estar habilitado.
+- Teste de regressao: `OpenApiNonDevelopmentOverrideIntegrationTest` ativa o perfil `production`, habilita OpenAPI e Swagger UI externamente e comprova resposta HTTP 401 sem autenticacao.
+- Revalidacao: os testes preservam a exposicao publica em `development` e exigem autenticacao fora dele, com HTTP 401 para requisicoes anonimas tanto no perfil padrao quanto quando Springdoc e habilitado externamente.
+- Status do achado: corrigido, aguardando revisao.

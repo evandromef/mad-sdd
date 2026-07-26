@@ -90,6 +90,14 @@ mvn spring-boot:run
 
 O Spring Boot importa automaticamente `codebase/.env`; variáveis de ambiente do processo continuam tendo precedência. `MAD_DB_HOST`, `MAD_DB_PORT`, `MAD_DB_NAME`, `MAD_DB_USERNAME` e `MAD_DB_PASSWORD` são obrigatórias. A porta pode ser alterada com `SERVER_PORT=<porta> mvn spring-boot:run`. O endpoint técnico padrão fica em `http://localhost:8080/api/v1/system/status`.
 
+Para expor a documentação OpenAPI durante o desenvolvimento, inicie o backend com o perfil `development`:
+
+```bash
+SPRING_PROFILES_ACTIVE=development mvn spring-boot:run
+```
+
+Com esse perfil ativo, a interface Swagger fica em `http://localhost:8080/swagger-ui.html` e o documento dinâmico em `http://localhost:8080/v3/api-docs`. Ambos permanecem desabilitados por padrão e não devem ser habilitados em homologação ou produção. O contrato versionado fica em `docs/api/openapi.yaml`; endpoints de negócio só podem ser adicionados após aprovação das ESPECs correspondentes.
+
 Antes de executar o frontend, carregue o `nvm`, selecione o Node.js 24 LTS e, em `codebase/frontend/`, execute:
 
 ```bash

@@ -9,8 +9,8 @@ um teste for criado, alterado ou removido.
 | Modulo | Arquivos de teste | Casos de teste | Ferramentas principais |
 | --- | ---: | ---: | --- |
 | Frontend | 3 | 4 | Angular TestBed, Vitest e Testing Library |
-| Backend | 2 | 4 | JUnit 5, Spring Boot Test, AssertJ, MockMvc e Testcontainers |
-| **Total** | **5** | **8** | — |
+| Backend | 5 | 7 | JUnit 5, Spring Boot Test, AssertJ, MockMvc e Testcontainers |
+| **Total** | **8** | **11** | — |
 
 ## Frontend
 
@@ -85,6 +85,31 @@ efemero iniciado pelo Testcontainers.
 | `shouldConfigureFlywayAndHibernateWithApplicationSchema` | Verifica se Flyway gerencia somente o schema `mad_db` e se Flyway e Hibernate usam esse schema como padrao. |
 | `shouldApplyInitialMigrationOnlyOnce` | Verifica a aplicacao da migration inicial V1, a criacao do schema `mad_db`, o armazenamento do historico do Flyway nesse schema, a ausencia desse historico em `public` e a idempotencia de uma segunda execucao do Flyway. |
 
+### `br/com/mad/openapi/OpenApiDevelopmentProfileIntegrationTest.java`
+
+Tipo: teste de integracao do contrato OpenAPI no perfil de desenvolvimento.
+
+| Caso | Comportamento verificado |
+| --- | --- |
+| `shouldExposeDocumentedApiOnlyInDevelopmentProfile` | Verifica que o perfil `development` expoe o documento OpenAPI 3.0 e o Swagger UI, documenta somente `GET /api/v1/system/status` e usa o schema tipado `SystemStatusResponse`. |
+
+### `br/com/mad/openapi/OpenApiDefaultProfileIntegrationTest.java`
+
+Tipo: teste de integracao de seguranca operacional da documentacao.
+
+| Caso | Comportamento verificado |
+| --- | --- |
+| `shouldNotExposeOpenApiOutsideDevelopmentProfile` | Verifica que o perfil padrao exige autenticacao para `/v3/api-docs` e `/swagger-ui.html`, retornando HTTP 401 para requisicoes anonimas. |
+
+### `br/com/mad/openapi/OpenApiNonDevelopmentOverrideIntegrationTest.java`
+
+Tipo: teste de regressao da seguranca da documentacao fora do perfil de
+desenvolvimento.
+
+| Caso | Comportamento verificado |
+| --- | --- |
+| `shouldRequireAuthenticationWhenOpenApiIsEnabledOutsideDevelopmentProfile` | Verifica que o perfil `production`, mesmo com OpenAPI e Swagger UI habilitados por propriedades externas, exige autenticacao para `/v3/api-docs` e `/swagger-ui.html`. |
+
 ### Execucao
 
 Pre-requisitos: Java 25, Maven e Docker acessivel ao Testcontainers.
@@ -96,10 +121,10 @@ mvn test
 
 ## Ultima validacao integral
 
-Validacao executada em 23 de julho de 2026:
+Validacao executada em 25 de julho de 2026:
 
 - frontend: 3 arquivos e 4 casos aprovados, sem falhas;
-- backend: 2 classes e 4 casos aprovados, sem falhas, erros ou testes ignorados;
+- backend: 5 classes e 7 casos aprovados, sem falhas, erros ou testes ignorados;
 - banco usado nos testes de integracao: PostgreSQL 17.10 via Testcontainers.
 
 Este resultado registra apenas a execucao indicada. O estado corrente deve ser

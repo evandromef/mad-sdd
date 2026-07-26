@@ -1,0 +1,33 @@
+openapi: 3.0.1
+info:
+  title: MAD API
+  description: API REST do sistema de gestao de investimentos MAD
+  version: v1
+paths:
+  /api/v1/system/status:
+    get:
+      tags:
+        - Sistema
+      summary: Consultar estado da API
+      operationId: status
+      responses:
+        "200":
+          description: API disponivel
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SystemStatusResponse"
+components:
+  schemas:
+    SystemStatusResponse:
+      type: object
+      description: Estado operacional da API
+      properties:
+        status:
+          type: string
+          description: Estado atual da API
+          example: UP
+          enum:
+            - UP
+      required:
+        - status
