@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,8 +18,9 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles({"development", "production"})
 @Testcontainers
-class OpenApiDefaultProfileIntegrationTest {
+class OpenApiConflictingProfilesIntegrationTest {
 
     @Container
     static final PostgreSQLContainer<?> POSTGRESQL = new PostgreSQLContainer<>("postgres:17-alpine");
@@ -36,23 +38,17 @@ class OpenApiDefaultProfileIntegrationTest {
     private MockMvc mockMvc;
 
     @Test
-    void shouldNotExposeOpenApiOutsideDevelopmentProfile() throws Exception {
+    void shouldHideOpenApiWhenDevelopmentIsCombinedWithAnotherProfile() throws Exception {
         MvcResult apiDocsResult = mockMvc.perform(get("/v3/api-docs")).andReturn();
 
         assertThat(apiDocsResult.getResponse().getStatus())
-                .as("Default profile should hide the OpenAPI document path")
+                .as("Conflicting profiles should hide the OpenAPI document")
                 .isEqualTo(HttpStatus.NOT_FOUND.value());
 
         MvcResult swaggerUiResult = mockMvc.perform(get("/swagger-ui.html")).andReturn();
 
         assertThat(swaggerUiResult.getResponse().getStatus())
-                .as("Default profile should hide the Swagger UI path")
+                .as("Conflicting profiles should hide Swagger UI")
                 .isEqualTo(HttpStatus.NOT_FOUND.value());
-
-        MvcResult protectedRouteResult = mockMvc.perform(get("/api/v1/protected-resource")).andReturn();
-
-        assertThat(protectedRouteResult.getResponse().getStatus())
-                .as("The OpenAPI filter should not change other protected routes")
-                .isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 }

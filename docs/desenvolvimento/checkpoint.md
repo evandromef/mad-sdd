@@ -7,7 +7,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - A implementacao anterior da TASK-0003 baseada em PostgreSQL 18 foi descartada conforme orientacao do desenvolvedor.
 - TASK-0003 reimplementada com PostgreSQL 17, aprovada diretamente pelo desenvolvedor e concluida.
 - TASK-0004 aprovada diretamente pelo desenvolvedor e concluida.
-- TASK-0005 implementada e colocada em revisao com contrato OpenAPI inicial e Swagger apenas no ambiente de desenvolvimento.
+- TASK-0005 aprovada diretamente pelo desenvolvedor e concluida com contrato OpenAPI inicial e Swagger apenas no ambiente de desenvolvimento.
 - Achado P2 da TASK-0005 corrigido e revalidado: uma habilitacao externa do Springdoc fora do perfil `development` nao torna a documentacao publica.
 - Frontend e backend executam nativamente no desenvolvimento; seus Dockerfiles sao exclusivos para homologacao e producao.
 - Ajuste da TASK-0004 revalidado com PostgreSQL saudavel, 4 testes backend, 4 testes frontend e build das duas imagens de entrega.
@@ -27,7 +27,7 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Proximo passo imediato
 
-- Aguardar a revisao e a aprovacao direta da TASK-0005, que permanece em `Em revisao`.
+- Aguardar orientacao para iniciar a TASK-0006.
 
 ## Bloqueios
 
@@ -48,10 +48,10 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 - A TASK-0002 foi aprovada diretamente e esta concluida.
 - A TASK-0003 foi aprovada diretamente e esta concluida.
 - A TASK-0004 foi aprovada diretamente e esta concluida.
-- A TASK-0005 esta em revisao e nao deve ser concluida sem aprovacao direta.
+- A TASK-0005 foi aprovada diretamente pelo desenvolvedor e esta concluida.
 - Swagger UI e o documento OpenAPI dinamico devem ser habilitados somente pelo perfil Spring `development`.
 - A autorizacao publica das rotas OpenAPI e Swagger tambem deve depender do perfil `development`, impedindo exposicao por sobrescrita externa de propriedades em outros ambientes.
-- Fora de `development`, as rotas de documentacao exigem autenticacao independentemente de o Springdoc estar habilitado; requisicoes anonimas recebem HTTP 401 antes da resolucao do recurso.
+- OpenAPI e Swagger UI ficam disponiveis somente quando `development` e o unico perfil ativo; fora dessa condicao, as rotas usam `denyAll()` e handlers especificos retornam HTTP 404 para usuarios anonimos e autenticados, mesmo se Springdoc for habilitado externamente.
 - O contrato OpenAPI versionado fica em `docs/api/openapi.yaml`; endpoints de negocio dependem das ESPECs correspondentes aprovadas.
 - O frontend executa com Angular CLI e Node.js 24 no desenvolvimento; sua imagem de entrega usa Nginx.
 - O backend executa com Maven e Java 25 no desenvolvimento; sua imagem de entrega usa JRE Java 25.
@@ -84,5 +84,5 @@ Memoria de trabalho volatil do plano de desenvolvimento.
 
 ## Ultima atualizacao
 
-- Data/hora: 2026-07-25 21:49 America/Sao_Paulo
+- Data/hora: 2026-07-27 16:25 America/Sao_Paulo
 - Responsavel: Codex

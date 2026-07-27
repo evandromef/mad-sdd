@@ -1,6 +1,7 @@
 package br.com.mad.openapi;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import org.junit.jupiter.api.Test;
@@ -42,16 +43,33 @@ class OpenApiNonDevelopmentOverrideIntegrationTest {
     private MockMvc mockMvc;
 
     @Test
-    void shouldRequireAuthenticationWhenOpenApiIsEnabledOutsideDevelopmentProfile() throws Exception {
+    void shouldHideOpenApiWhenEnabledOutsideDevelopmentProfile() throws Exception {
         MvcResult apiDocsResult = mockMvc.perform(get("/v3/api-docs")).andReturn();
-        MvcResult swaggerUiResult = mockMvc.perform(get("/swagger-ui.html")).andReturn();
 
         assertThat(apiDocsResult.getResponse().getStatus())
-                .as("Non-development profile should protect the OpenAPI document")
-                .isEqualTo(HttpStatus.UNAUTHORIZED.value());
+                .as("Non-development profile should hide the OpenAPI document")
+                .isEqualTo(HttpStatus.NOT_FOUND.value());
+
+        MvcResult swaggerUiResult = mockMvc.perform(get("/swagger-ui.html")).andReturn();
 
         assertThat(swaggerUiResult.getResponse().getStatus())
-                .as("Non-development profile should protect Swagger UI")
-                .isEqualTo(HttpStatus.UNAUTHORIZED.value());
+                .as("Non-development profile should hide Swagger UI")
+                .isEqualTo(HttpStatus.NOT_FOUND.value());
+
+        MvcResult authenticatedApiDocsResult = mockMvc
+                .perform(get("/v3/api-docs").with(user("reviewer")))
+                .andReturn();
+
+        assertThat(authenticatedApiDocsResult.getResponse().getStatus())
+                .as("Authenticated users should not discover the OpenAPI document outside development")
+                .isEqualTo(HttpStatus.NOT_FOUND.value());
+
+        MvcResult authenticatedSwaggerUiResult = mockMvc
+                .perform(get("/swagger-ui.html").with(user("reviewer")))
+                .andReturn();
+
+        assertThat(authenticatedSwaggerUiResult.getResponse().getStatus())
+                .as("Authenticated users should not discover Swagger UI outside development")
+                .isEqualTo(HttpStatus.NOT_FOUND.value());
     }
 }

@@ -30,7 +30,7 @@ Preparar a base tecnica do projeto para desenvolvimento seguro e repetivel.
 | [TASK-0002](../tasks/sprint-00/TASK-0002-scaffold-frontend-angular.md) | Scaffold do frontend Angular. | Concluida | Codex |
 | [TASK-0003](../tasks/sprint-00/TASK-0003-banco-flyway-primeira-migration.md) | Banco local, Flyway e primeira migration. | Concluida | Codex |
 | [TASK-0004](../tasks/sprint-00/TASK-0004-docker-compose-desenvolvimento.md) | PostgreSQL local e conteineres de entrega. | Concluida | Codex |
-| [TASK-0005](../tasks/sprint-00/TASK-0005-openapi-contrato-inicial-api.md) | OpenAPI e contrato inicial da API. | Em revisao | Codex |
+| [TASK-0005](../tasks/sprint-00/TASK-0005-openapi-contrato-inicial-api.md) | OpenAPI e contrato inicial da API. | Concluida | Codex |
 | [TASK-0006](../tasks/sprint-00/TASK-0006-padroes-testes-cobertura.md) | Padroes de testes e cobertura. | Planejada | |
 | [TASK-0007](../tasks/sprint-00/TASK-0007-ci-inicial.md) | CI inicial. | Planejada | |
 | [TASK-0008](../tasks/sprint-00/TASK-0008-documentacao-operacional-fundacao.md) | Documentacao operacional da fundacao. | Planejada | |

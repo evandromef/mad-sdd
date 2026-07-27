@@ -53,8 +53,8 @@ O projeto exige API REST JSON documentada por OpenAPI. A fundacao deve criar o m
 
 - [ ] Planejada
 - [ ] Em andamento
-- [x] Em revisao
-- [ ] Concluida
+- [ ] Em revisao
+- [x] Concluida
 
 ## Notas de implementacao
 
@@ -66,9 +66,10 @@ O projeto exige API REST JSON documentada por OpenAPI. A fundacao deve criar o m
 - O contrato versionado inicial esta em `docs/api/openapi.yaml` e documenta somente `GET /api/v1/system/status`.
 - A resposta tecnica passou a usar o record `SystemStatusResponse`, evitando schema generico no contrato.
 - A validacao identificou que o endpoint nao declarava o tipo produzido; `application/json` foi explicitado para alinhar implementacao, documento dinamico e contrato versionado.
-- Testes automatizados comprovam que o perfil `development` expoe OpenAPI e Swagger UI e que perfis nao-development exigem autenticacao para essas rotas, mesmo quando a documentacao esta desabilitada.
-- A revisao da correcao do achado P2 identificou e corrigiu uma expectativa obsoleta de HTTP 404 no teste do perfil padrao; a protecao retorna HTTP 401 antes da resolucao do recurso.
-- Validacao final apos o alinhamento do teste e da documentacao: `mvn test` executou 7 testes com sucesso, sem falhas, erros ou testes ignorados.
+- Testes automatizados comprovam que OpenAPI e Swagger UI ficam publicos somente quando `development` e o unico perfil ativo.
+- Fora dessa condicao, as rotas usam `denyAll()` e handlers especificos de autenticacao ausente e acesso negado retornam HTTP 404, inclusive para usuarios autenticados e quando Springdoc e habilitado externamente.
+- Rotas protegidas que nao pertencem a documentacao preservam a resposta HTTP 401 para requisicoes anonimas.
+- Validacao final: `mvn test` executou 8 testes com sucesso, sem falhas, erros ou testes ignorados.
 
 ## Itens de revisao
 
@@ -80,6 +81,6 @@ O projeto exige API REST JSON documentada por OpenAPI. A fundacao deve criar o m
 - Correcao esperada: condicionar as permissoes publicas das rotas de documentacao ao perfil `development`, mantendo as rotas tecnicas publicas independentes dessa condicao.
 - Teste de regressao esperado: comprovar que uma configuracao nao-development com Springdoc habilitado externamente nao torna as rotas de documentacao publicas, preservando o acesso no perfil `development`.
 - Correcao aplicada: o `SecurityConfig` libera publicamente as rotas de documentacao somente quando o perfil `development` esta ativo. Em qualquer outro perfil, as rotas exigem autenticacao, independentemente de o Springdoc estar habilitado.
-- Teste de regressao: `OpenApiNonDevelopmentOverrideIntegrationTest` ativa o perfil `production`, habilita OpenAPI e Swagger UI externamente e comprova resposta HTTP 401 sem autenticacao.
-- Revalidacao: os testes preservam a exposicao publica em `development` e exigem autenticacao fora dele, com HTTP 401 para requisicoes anonimas tanto no perfil padrao quanto quando Springdoc e habilitado externamente.
+- Teste de regressao: `OpenApiNonDevelopmentOverrideIntegrationTest` ativa o perfil `production`, habilita OpenAPI e Swagger UI externamente e comprova HTTP 404 para usuarios anonimos e autenticados.
+- Revalidacao: os testes preservam a exposicao publica em `development`, ocultam a documentacao com HTTP 404 fora dele e falham fechado quando `development` e combinado com outro perfil.
 - Status do achado: corrigido, aguardando revisao.

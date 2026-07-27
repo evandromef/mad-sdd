@@ -1,10 +1,6 @@
 package br.com.mad.openapi;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,9 +11,13 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -48,13 +48,14 @@ class OpenApiDevelopmentProfileIntegrationTest {
     @Test
     void shouldExposeDocumentedApiOnlyInDevelopmentProfile() throws Exception {
         MvcResult result = mockMvc.perform(get("/v3/api-docs")).andReturn();
-        MvcResult swaggerUiResult = mockMvc.perform(get("/swagger-ui.html")).andReturn();
 
         int actualHttpStatus = result.getResponse().getStatus();
 
         assertThat(actualHttpStatus)
                 .as("Development profile should expose the OpenAPI document")
                 .isEqualTo(HttpStatus.OK.value());
+
+        MvcResult swaggerUiResult = mockMvc.perform(get("/swagger-ui.html")).andReturn();
 
         assertThat(swaggerUiResult.getResponse().getStatus())
                 .as("Development profile should expose Swagger UI")
